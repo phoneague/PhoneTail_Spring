@@ -1,0 +1,333 @@
+@charset "UTF-8";
+
+/* #wrap{width:100%; margin: 0 auto; border:1px solid red; max-width:1024px; display:flex; flex-direction:column;} */
+.lititle h2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 200%;
+    margin: 30px;
+}
+a{text-decoration:none;  color:#3f4549;}
+.content-wrapper {
+  display: flex;
+	align-items: center;
+	font-family: "Roboto", sans-serif;
+	margin: 30px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.content-wrapper {
+	display: flex;
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+.container {
+	width: 100%;
+	flex: 4;
+	display: flex;
+}
+
+.container form {
+	flex: 4;
+	display: flex;
+	flex-direction: column;
+}
+
+.container form h2 {
+	margin: 0;
+	margin-bottom: 20px;
+	font-weight: normal;
+	font-size: 28px;
+}
+
+.container form {
+	padding: 10px;
+}
+
+.container form .field {
+	display: flex;
+	align-items: center;
+	margin: 10px 0;
+	padding: 5px;
+}
+
+.container form .field label {
+	flex: 1;
+}
+
+.container form .field input {
+	flex: 4;
+	padding: 5px;
+	border-radius: 3px;
+	border: 1px solid #AAA;
+}
+
+.container form .field div {
+	flex: 4;
+	display: flex;
+}
+
+.container form .field div input[type=text] {
+	flex: 4;
+}
+
+.container form .field div input[type=button] {
+	flex: 1;
+}
+
+.container form .btn {
+	flex: 1;
+	display: flex;
+	margin: 10px 0;
+	justify-content: center
+}
+
+.container form .searchbtn input {
+	/* flex:1; */
+	width: 40px;
+	margin: 10px 3px;
+	background-color: #3f4549;
+	border: none;
+	color: white;
+	border-radius: 5px;
+	padding: 10px 0;
+}
+
+/* #searchbtn{
+	width:40px;
+   margin:10px 3px;
+   background-color: gray;
+   border:none;
+   color:white;
+   border-radius: 5px;
+   padding:10px 0;
+} */
+header {
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+#logo {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#logo img {
+	vertical-align: middle;
+}
+
+#logo input {
+	padding: 5px;
+	font-weight: bold;
+	font-size: 120%;
+}
+
+.litb {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 30px;
+}
+
+.litb .row {
+	display: flex;
+	border-top: 1px solid #3f4549;
+	border-bottom: 1px solid #3f4549;
+}
+
+.litb .coltitle {
+	background: #3f4549; /* margin:1px; */
+	padding: 10px;
+	color: white;
+	text-align: center;
+}
+
+.litb .col { /* border:1px dotted #3f4549; */
+	margin: 1px;
+	padding: 10px;
+	text-align: center;
+}
+
+.litb .coltitle:nth-child(1), .litb .col:nth-child(1) {
+	flex: 1
+}
+
+.litb .coltitle:nth-child(2), .litb .col:nth-child(2) {
+	flex: 1
+}
+
+.litb .coltitle:nth-child(3), .litb .col:nth-child(3) {
+	flex: 3;
+}
+
+.litb .coltitle:nth-child(4), .litb .col:nth-child(4) {
+	flex: 1;
+}
+
+.litb .coltitle:nth-child(5), .litb .col:nth-child(5) {
+	flex: 2
+}
+
+.litb .coltitle:nth-child(6), .litb .col:nth-child(6) {
+	flex: 1
+}
+
+.litb .coltitle:nth-child(7), .litb .col:nth-child(7) {
+	flex: 1
+}
+
+.mrow {
+	display: flex;
+	border-top: 1px solid #3f4549;
+	border-bottom: 1px solid #3f4549;
+}
+
+.mrow .coltitle:nth-child(1), .mrow .col:nth-child(1) {
+	flex: 2
+}
+
+.mrow .coltitle:nth-child(2), .mrow .col:nth-child(2) {
+	flex: 1
+}
+
+.mrow .coltitle:nth-child(3), .mrow .col:nth-child(3) {
+	flex: 3;
+}
+
+.mrow .coltitle:nth-child(4), .mrow .col:nth-child(4) {
+	flex: 3;
+}
+
+.mrow .coltitle:nth-child(5), .mrow .col:nth-child(5) {
+	flex: 2
+}
+
+.mrow .coltitle:nth-child(6), .mrow .col:nth-child(6) {
+	flex: 1
+}
+
+.mrow .coltitle:nth-child(7), .mrow .col:nth-child(7) {
+	flex: 1
+}
+
+.litb .col a {
+	text-decoration: none;
+	color: red;
+}
+
+.litb .col a:hover {
+	color: red !important;
+	text-decoration: underline !important;
+}
+
+.litb .row .searchbtn {
+	background-color: black;
+	border: none;
+	color: white;
+	border-radius: 5px;
+	width: 120px;
+	margin:5px;
+}
+
+.paging {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none !important;
+}
+.paging a{
+  color: #3f4549;
+  float: center;
+  padding: 8px 16px;
+  text-decoration: none;
+  text-align:center;
+  border: 1px solid #ddd;
+	}
+.paging a.active {
+  background-color: #ddd;
+  color: white;
+}
+.paging a:hover:not(.active) {background-color: #ddd;}
+
+footer {
+	width: 100%;
+}
+
+footer div {
+	font-size: 110%;
+}
+
+@media (max-width: 768px) {
+.lititle h2 {
+    font-size: 150%; /* 폰트 크기 조정 */
+    margin: 20px; /* 마진 조정 */
+    justify-content: center; /* 텍스트 중앙 정렬 */
+}
+
+/* content-wrapper */
+.content-wrapper {
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    margin: 20px 10px; /* 마진 조정 */
+}
+
+/* container */
+.container {
+    flex-direction: column; /* 세로 방향으로 정렬 */
+}
+
+.container form h2 {
+    font-size: 24px; /* 폰트 크기 조정 */
+    margin-bottom: 15px; /* 마진 조정 */
+}
+
+.container form .field {
+    margin: 10px 0; /* 마진 조정 */
+    display: flex; /* 체크박스가 항상 표시되도록 설정 */
+    flex-direction: column; /* 세로 방향으로 정렬 */
+}
+
+.container form .field input {
+    width: 100%; /* 입력 필드 너비 조정 */
+    margin: 5px 0; /* 마진 조정 */
+}
+
+.litb .coltitle,
+    .litb .col {
+        font-size: 14px;
+}
+
+.container form .field input[type="checkbox"] {
+    margin-right: 5px; /* 체크박스와 텍스트 사이의 간격 조정 */
+}
+.litb .col {
+    flex: 1; /* 1:1 비율로 조정 */
+    padding: 8px; /* 패딩 조정 */
+    overflow: hidden; /* 넘치는 부분 감추기 */
+    text-overflow: ellipsis; /* 넘칠 경우 ... 표시 */
+}
+
+
+.litb .col a {
+    color: red; /* 링크 색상 변경 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+/* paging */
+.paging {
+    margin-top: 20px; /* 마진 조정 */
+    align-items: center; /* 가운데 정렬 */
+}
+
+
+}
+

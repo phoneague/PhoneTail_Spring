@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+#loginwrap{ width:1024px; margin: 0 auto; }
+
+#loginwrap article{
+	flex:4;
+	display: flex;
+	margin:100px auto;
+	
+}
+
+#loginwrap article form{
+	flex:1;
+	display: flex;
+	flex-direction: column;
+}
+
+
+#loginwrap article form{padding:10px;}
+
+#loginwrap article form .field{
+	display: flex;
+	margin:10px 0;
+}
+#loginwrap article form .field label{
+	flex:1;
+}
+#loginwrap article form .field input{
+	flex:4;
+	padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #AAA;
+}
+
+#loginwrap article form .field div{
+	flex:4;
+	display: flex;
+}
+#loginwrap article form .field div input[type=text]{
+	flex:4;
+}
+#loginwrap article form .field div input[type=button]{
+	flex:1;
+}
+
+
+article form .loginbtn{
+	flex:1;
+	display: flex;
+	margin:10px 0;
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+article form .loginbtn input{
+	flex:1;
+	margin:10px 3px;
+	background-color: black;
+	border:none;
+	color:white;
+	border-radius: 5px;
+	padding:10px 0;
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+article form .checkbtn{
+	flex:1;
+	background-color: black;
+	border:none;
+	color:white;
+	border-radius: 5px;
+	padding:10px 0;
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+@media (max-width: 767px) {
+    #loginwrap {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    #loginwrap article {
+        flex-direction: column;
+        margin: 50px auto;
+    }
+
+    #loginwrap article form {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    #loginwrap article form .field{
+	display: flex;
+	font-size:90%;
+}
+    
+}
+
+
+
+
+
