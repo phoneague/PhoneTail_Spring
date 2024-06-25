@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>idcheck</title>
-<link rel="stylesheet" href="css/login.css"> <!-- admin,일반 로그인 폼들 css 통합 -->
+<link rel="stylesheet" href="/css/login.css"> <!-- admin,일반 로그인 폼들 css 통합 -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 <script type="text/javascript">
 	function idok(userid){
@@ -39,7 +39,7 @@ border-radius: 5px;
 </head>
 <body>
 <!-- 재검색창 -->
-<form  action="phonetail.do" style="margin:20px 0; ">
+<form style="margin:20px 0; ">
 	<input type="hidden" name="command" value="idcheck" />
 	아이디 : <input type="text" name="userid" value="${userid}" /><!-- value 에 확인된 아이디 표시 -->
 	<input type="submit" value="중복체크" />
