@@ -15,8 +15,7 @@
 
 
 
-
-
+<link rel="stylesheet" href="css.product.css">
 <link rel="stylesheet" href="css/submenu.css"> <!-- submenu들 css 통합  -->
 <link rel="stylesheet" href="css/header_footer.css"> <!-- header footer의 css 통합 -->
 <link rel="stylesheet" href="css/list.css"> <!-- product, chat제외 list 들 css 통합 -->

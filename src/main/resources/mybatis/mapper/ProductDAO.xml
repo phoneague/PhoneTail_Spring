@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.phonetail_spring.dao.IProductDAO">
+
+    <select id="getNewList" resultType="com.himedia.phonetail_spring.dto.ProductDTO">
+        select * from new_product
+    </select>
+
+    <select id="getProduct" resultType="com.himedia.phonetail_spring.dto.ProductDTO">
+        select * from product where pseq=#{param1}
+    </select>
+
+    <select id="getAllCount" resultType="_int">
+        select count(*) from product where (brand=COALESCE(NULLIF(#{param2}, ''), brand)) and ${param3} like concat('%',#{param2},'%')
+    </select>
+
+    <select id="getProductList" resultType="com.himedia.phonetail_spring.dto.ProductDTO">
+        SELECT * FROM product
+        WHERE (brand = COALESCE(NULLIF(#{param2}, ''), brand))
+          AND ${param4} LIKE concat('%',#{param3},'%')
+        ORDER BY pseq DESC
+            LIMIT #{param1.displayRow}
+        OFFSET #{param1.startNum}
+    </select>
+
+</mapper>
