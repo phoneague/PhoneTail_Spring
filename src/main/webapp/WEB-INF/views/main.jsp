@@ -45,8 +45,8 @@
     <c:forEach items="${newList}" var="newlist" varStatus="status">
         <div class="box new-list-item">
             <div class="box-inner">
-                <a href="productDetail&pseq=${newlist.pseq}">
-                    <img src="product/images/${newlist.saveimagefile}">
+                <a href="productDetail?pseq=${newlist.pseq}">
+                    <img src="product_images/${newlist.saveimagefile}">
                 </a>
             </div>
             <h2>

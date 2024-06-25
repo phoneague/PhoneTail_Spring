@@ -73,7 +73,7 @@
 
         </div>
         <div class="detailImage">
-            <img src="product/images/${productDTO.saveimagefile}" width="600" />
+            <img src="product_images/${productDTO.saveimagefile}" width="600" />
         </div>
     </div>
     <c:choose>

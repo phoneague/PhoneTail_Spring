@@ -5,7 +5,7 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 @Data
-public class ProductVO {
+public class ProductDTO {
     private int pseq;
     private String brand;
     private String model;
