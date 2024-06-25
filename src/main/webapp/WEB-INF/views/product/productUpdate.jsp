@@ -1,17 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ include file="../header.jsp" %>
+<link rel="stylesheet" href="css/product.css">
 
 <div id="productWrap">
     <div class="row">
         <div class="title">Product Update Form</div>
     </div>
-    <form name="productUpdateForm" method="post" enctype="multipart/form-data">
+    <form name="productUpdateForm" method="post" action="productUpdate">
         <div class="container">
             <div class="detailInfos">
                 <div class="row">
                     <div class="coltitle">판매자</div>
-                    <div class="col">${loginUser}
-                        <input type="hidden" name="userid" value="${loginUser}" />
+                    <div class="col">${login.getUserid()}
+                        <input type="hidden" name="userid" value="${login.getUserid()}" />
                     </div>
                 </div>
                 <div class="row">
@@ -46,7 +47,12 @@
                 </div>
                 <div class="row">
                     <div class="coltitle">이미지 등록</div>
-                    <div class="col"><input type="file" name="image"  onChange="show_preview(event)"></div>
+                    <div class="col">
+                        <input type="hidden" name="image" id="image"/> <%--전송될 파일이름--%>
+                        <input type="hidden" name="saveimagefile" id="saveimagefile"/> <%--전송될 파일이름--%>
+
+                        <div id="filename"></div>
+                    </div>
                 </div>
                 <input type="hidden" name="pseq" value="${ProductDTO.pseq}">
                 <input type="hidden" name="oldimage" value="${ProductDTO.image}">
@@ -57,12 +63,22 @@
             </div>
         </div>
         <div class="button_box">
-            <input type="button" value="상품수정" onClick="go_update()">
+            <input type="submit" value="상품수정">
             <input
                     type="button" value="목록으로"
                     onClick="location.href='productList'">
         </div>
+        <div class="row">
+            <div class="coltitle">에러메시지</div>
+            <div class="col">${message}</div>
+        </div>
     </form>
+    <div style="position:relative; border:1px solid black; width:500px; margin:0 auto; top:-150px;">
+        <form name="formm" id="fileupForm" method="post" enctype="multipart/form-data">
+            <input type="file" name="fileimage" />
+            <input type="button" id="myButton" value="추가" />
+        </form>
+    </div>
 </div>
 
 

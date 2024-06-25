@@ -21,4 +21,6 @@ public interface IProductDAO {
     void insertProduct(ProductDTO productdto);
 
     void updateProduct(ProductDTO productdto);
+
+    void deleteProduct(int pseq);
 }

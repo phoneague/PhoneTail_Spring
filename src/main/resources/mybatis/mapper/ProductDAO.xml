@@ -35,4 +35,8 @@
         update product set brand=#{brand}, model=#{model}, price=#{price}, comment=#{comment}, image=#{image}, saveimagefile=#{saveimagefile} where pseq=#{pseq}
     </update>
 
+    <delete id="deleteProduct">
+        delete from product where pseq=#{param1}
+    </delete>
+
 </mapper>

@@ -93,4 +93,8 @@ public class ProductService {
     public void updateProduct(ProductDTO productdto) {
         pdao.updateProduct(productdto);
     }
+
+    public void deleteProduct(int pseq) {
+        pdao.deleteProduct(pseq);
+    }
 }
