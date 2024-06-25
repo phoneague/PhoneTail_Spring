@@ -58,6 +58,13 @@ public class AdminController {
         return url;
     }
 
+    @GetMapping("/adminLogout")
+    public String adminLogout(HttpServletRequest request) throws IOException {
+        HttpSession session = request.getSession();
+        session.removeAttribute("adminUser");
+        return "redirect:/";
+    }
+
     @GetMapping("/adminReportList")
     public ModelAndView adminReportList(HttpServletRequest request) throws IOException {
         ModelAndView mav = new ModelAndView();
@@ -73,6 +80,23 @@ public class AdminController {
         }
         return mav;
     }
+
+    @GetMapping("adminQnaList")
+    public ModelAndView adminQnaList(HttpServletRequest request) throws IOException {
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("adminUser") == null) {
+            mav.setViewName("admin/adminLogin");
+        } else {
+            HashMap<String, Object> result = as.getAdminQnaList(request);
+            mav.addObject("qnaList",result.get("qnaList"));
+            mav.addObject("paging",result.get("paging"));
+            mav.addObject("key",result.get("key"));
+            mav.setViewName("admin/qna/adminQnaList");
+        }
+        return mav;
+    }
+
 
 
 }
