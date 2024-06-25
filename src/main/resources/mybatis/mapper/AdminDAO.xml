@@ -15,6 +15,9 @@
     <select id="getReportList" resultType="com.himedia.phonetail_spring.dto.ReportDTO">
         SELECT * FROM report WHERE userid LIKE concat('%',#{param2},'%')  ORDER BY restate,reseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
     </select>
+    <select id="getQnaList" resultType="com.himedia.phonetail_spring.dto.QuestionDTO">
+        SELECT * FROM question WHERE userid LIKE concat('%',#{param2},'%')  ORDER BY indate,qseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
+    </select>
 
 
 </mapper>

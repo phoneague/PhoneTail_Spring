@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.phonetail_spring.dao.IQuestionDAO">
+    <select id="getQna" resultType="com.himedia.phonetail_spring.dto.QuestionDTO">
+        SELECT * FROM question WHERE qseq=${param1}
+    </select>
+    <update id="updateReadCount">
+        UPDATE question SET readCount = readCount + 1 WHERE qseq = ${param1}
+    </update>
+</mapper>

@@ -2,6 +2,7 @@ package com.himedia.phonetail_spring.dao;
 
 import com.himedia.phonetail_spring.dto.AdminDTO;
 import com.himedia.phonetail_spring.dto.Paging;
+import com.himedia.phonetail_spring.dto.QuestionDTO;
 import com.himedia.phonetail_spring.dto.ReportDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,4 +16,6 @@ public interface IAdminDAO {
     int getAllCount(String tablename, String fieldname, String key);
 
     List<ReportDTO> getReportList(Paging paging, String key);
+
+    List<QuestionDTO> getQnaList(Paging paging, String key);
 }
