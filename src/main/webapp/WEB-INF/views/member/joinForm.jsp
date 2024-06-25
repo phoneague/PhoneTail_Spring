@@ -77,7 +77,7 @@
 				</div>
 			</form>
 		</article>
-</div>
+	</div>
 </section>
 <%@ include file="../footer.jsp"%>
 </div>

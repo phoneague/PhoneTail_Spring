@@ -7,5 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface IMemberDAO {
     MemberDTO getMember(String userid);
 
-    int insertMember(MemberDTO mdto);
+    void insertMember(MemberDTO mdto);
+
+    int updateMember(MemberDTO mdto);
+
+    int deleteMember(String userid);
 }

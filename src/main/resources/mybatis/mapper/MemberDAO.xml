@@ -11,5 +11,11 @@
         insert into member(userid, pwd, name, phone, email, address1, address2, address3)
         VALUES (#{userid}, #{pwd}, #{name}, #{phone}, #{email}, #{address1}, #{address2}, #{address3})
     </insert>
-
+    <update id="updateMember" parameterType="com.himedia.phonetail_spring.dto.MemberDTO">
+        update member set pwd=#{pwd}, name=#{name}, phone=#{phone}, email=#{email}, zip_num=#{zip_num},
+                          address1=#{address1}, address2=#{address2}, address3=#{address3} where userid=#{userid}
+    </update>
+    <delete id="deleteMember">
+        delete from member where userid=#{userid}
+    </delete>
 </mapper>

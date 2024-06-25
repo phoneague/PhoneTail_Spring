@@ -164,12 +164,12 @@ ALTER TABLE `phonetail`.`member`
     CHANGE COLUMN `address2` `address2` VARCHAR(100) NULL ;
 
 
-CREATE VIEW hak AS
+CREATE OR REPLACE VIEW hak AS
 SELECT cl.lseq, cl.sid, cl.bid, p.pseq, p.model, p.price
 FROM chatlist cl
          JOIN product p ON cl.pseq = p.pseq;
 
-CREATE VIEW hakk AS
+CREATE OR REPLACE VIEW hakk AS
 SELECT
     p.model AS model,
     p.price AS price,
