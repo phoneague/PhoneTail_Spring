@@ -83,11 +83,11 @@
                     <c:when test="${productDTO.sellstate eq 'N'}">
                         <input type="button" value="판매확정" onClick="sold(${productDTO.pseq})" />
                         <input type="button" value="상품수정"
-                               onClick="go_updateForm(${productDTO.pseq}, '${productDTO.userid}', '${login.userid}')" />
+                               onClick="go_updateForm(${productDTO.pseq})" />
                     </c:when>
                 </c:choose>
                 <input type="button" value="상품삭제"
-                       onClick="go_delete(${productDTO.pseq}, '${productDTO.userid}', '${login.userid}')" />
+                       onClick="go_delete(${productDTO.pseq})" />
             </div>
         </c:when>
         <c:otherwise>

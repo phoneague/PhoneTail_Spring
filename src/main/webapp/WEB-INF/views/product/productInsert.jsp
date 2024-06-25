@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ include file="../header.jsp" %>
+<link rel="stylesheet" href="css/product.css">
 
 <div id="productWrap">
     <form name="productInsertForm" method="post"
@@ -25,15 +26,15 @@
                 </div>
                 <div class="row">
                     <div class="coltitle">모델명</div>
-                    <div class="col"><input type="text" name="model" /></div>
+                    <div class="col"><input type="text" name="model" value="${dto.model != null ? dto.model : ''}" /></div>
                 </div>
                 <div class="row">
                     <div class="coltitle">가격</div>
-                    <div class="col"><input type="text" name="price" /></div>
+                    <div class="col"><input type="text" name="price" value="${dto.price != null ? dto.price : 0}" /></div>
                 </div>
                 <div class="row">
                     <div class="coltitle">글 내용</div>
-                    <div class="col"><textarea name="comment" rows="8"></textarea></div>
+                    <div class="col"><textarea name="comment" rows="8">${dto.comment}</textarea></div>
                 </div>
                 <div class="row">
                     <div class="coltitle">이미지 등록</div>
@@ -53,6 +54,10 @@
             <input type="submit" value="상품등록">
             <input type="button" value="목록으로"
                    onClick="location.href='productList'">
+        </div>
+        <div class="row">
+            <div class="coltitle">에러메시지</div>
+            <div class="col">${message}</div>
         </div>
     </form>
     <div style="position:relative; border:1px solid black; width:500px; margin:0 auto; top:-150px;">

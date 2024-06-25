@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -105,61 +106,62 @@ public class ProductController {
 
     @PostMapping("/productInsert")
     public String productInsert(@ModelAttribute("dto") @Valid ProductDTO productdto,
-                                    BindingResult result, Model model){
+                                    BindingResult result, Model model,
+                                RedirectAttributes redirectAttributes){
         String url = "redirect:/productInsertForm";
-        if(result.getFieldError("brand")!=null)
-            model.addAttribute("message", result.getFieldError("brand").getDefaultMessage());
-        else if(result.getFieldError("model")!=null)
-            model.addAttribute("message", result.getFieldError("model").getDefaultMessage());
-        else if(result.getFieldError("price")!=null)
-            model.addAttribute("message", result.getFieldError("price").getDefaultMessage());
-        else if(result.getFieldError("comment")!=null)
-            model.addAttribute("message", result.getFieldError("comment").getDefaultMessage());
-        else if(result.getFieldError("image")!=null)
-            model.addAttribute("message", result.getFieldError("image").getDefaultMessage());
-        else if(result.getFieldError("saveimagefile")!=null)
-            model.addAttribute("message", result.getFieldError("saveimagefile").getDefaultMessage());
-        else if(result.getFieldError("userid")!=null)
-            model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
-        else {
+        if (result.hasErrors()) {
+            String errorMessage = result.getFieldError().getDefaultMessage();
+            model.addAttribute("message", errorMessage);
+            redirectAttributes.addFlashAttribute("message", errorMessage);
+            redirectAttributes.addFlashAttribute("dto", productdto);
+            return url;
+        } else{
             ps.insertProduct(productdto);
             url = "redirect:/productList";
-        }
-        return url;
-    }
 
+
+            return url;
+        }
+    }
 
 
     @GetMapping("/productUpdateForm")
     public String productUpdateForm(HttpServletRequest request, Model model){
+        int pseq = Integer.parseInt(request.getParameter("pseq"));
+        HttpSession session = request.getSession();
+        MemberDTO mdto =(MemberDTO)session.getAttribute("login");
+        String[] brandList = {"Samsung","Apple","LG", "기타"};
+
+        model.addAttribute("ProductDTO", ps.getProduct(pseq));
+        model.addAttribute("login", mdto);
+        model.addAttribute("brandList", brandList);
+
         return "product/productUpdate";
     }
 
-    @GetMapping("/productUpdate")
+    @PostMapping("/productUpdate")
     public String productUpdate(@ModelAttribute("dto") @Valid ProductDTO productdto,
-                                BindingResult result, Model model){
+                                BindingResult result, Model model, RedirectAttributes redirectAttributes){
         String url = "redirect:/productUpdateForm";
-        if(result.getFieldError("brand")!=null)
-            model.addAttribute("message", result.getFieldError("brand").getDefaultMessage());
-        else if(result.getFieldError("model")!=null)
-            model.addAttribute("message", result.getFieldError("model").getDefaultMessage());
-        else if(result.getFieldError("price")!=null)
-            model.addAttribute("message", result.getFieldError("price").getDefaultMessage());
-        else if(result.getFieldError("comment")!=null)
-            model.addAttribute("message", result.getFieldError("comment").getDefaultMessage());
-        else if(result.getFieldError("image")!=null)
-            model.addAttribute("message", result.getFieldError("image").getDefaultMessage());
-        else if(result.getFieldError("saveimagefile")!=null)
-            model.addAttribute("message", result.getFieldError("saveimagefile").getDefaultMessage());
-        else if(result.getFieldError("userid")!=null)
-            model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
-        else {
+        if (result.hasErrors()) {
+            String errorMessage = result.getFieldError().getDefaultMessage();
+            model.addAttribute("message", errorMessage);
+            redirectAttributes.addFlashAttribute("message", errorMessage);
+            redirectAttributes.addFlashAttribute("dto", productdto);
+            return url;
+        } else{
             ps.updateProduct(productdto);
             url = "redirect:/productList";
+
+            return url;
         }
-        return url;
     }
 
+    @GetMapping("/productDelete")
+    public String productDelete(@RequestParam("pseq") int pseq){
+        ps.deleteProduct(pseq);
+        return "redirect:/productList";
+    }
 
 
 
