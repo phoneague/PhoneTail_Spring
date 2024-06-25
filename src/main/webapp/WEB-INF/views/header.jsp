@@ -27,7 +27,7 @@
 
 <script src="script/jquery-3.7.1.min.js"></script>
 <script src="script/phonetail.js"></script>
-<script src="product/script/product.js"></script>
+<script src="script/product.js"></script>
 <script src="admin/script/admin.js"></script>
 <script src="report/script/report.js"></script>
 <script src="chat/ChatList.js"></script>
@@ -39,30 +39,30 @@
 <div id="wrap">
 	<header>
 		<nav id="top_menu">
-				<div id="logo"><img src="images/phonetail_logo2.png" height="150" onClick="location.href='phonetail.do?command=main'"></div>
+				<div id="logo"><img src="images/phonetail_logo2.png" height="150" onClick="location.href='/'"></div>
 				<div class="gnb">
 						<c:choose>
 								<c:when test="${empty login}">
-										<a href="phonetail.do?command=loginForm">LOGIN</a>
-										<a href="phonetail.do?command=joinForm">JOIN</a>
+										<a href="loginForm">LOGIN</a>
+										<a href="joinForm">JOIN</a>
 								</c:when>
 								<c:otherwise>
-										<a href="phonetail.do?command=mypage">${login.name}(${login.userid})</a>
-				       					<a href="phonetail.do?command=logout">LOGOUT</a>
+										<a href="mypage">${login.name}(${login.userid})</a>
+				       					<a href="logout">LOGOUT</a>
 								</c:otherwise>
 						</c:choose>
-						<a href="phonetail.do?command=productInsertForm">SELL</a>
-						<a href="phonetail.do?command=mypage">MY PAGE</a>
-						<a href="phonetail.do?command=qnaList&page=1">Q&A</a>	
-						<a href="phonetail.do?command=chatList">CHAT</a>	
+						<a href="productInsertForm">SELL</a>
+						<a href="mypage">MY PAGE</a>
+						<a href="qnaList?page=1">Q&A</a>
+						<a href="chatList">CHAT</a>
 				</div>
 				<div class="hmenu"><div></div>	<div></div>	<div></div> 	</div>
 		</nav><br>
 		<nav id="category_menu">
-				<a href="phonetail.do?command=productList&page=1&brand=">All Products</a>
-				<a href="phonetail.do?command=productList&page=1&brand=Apple">Apple</a>
-				<a href="phonetail.do?command=productList&page=1&brand=Samsung">Galaxy</a>
-				<a href="phonetail.do?command=productList&page=1&brand=LG">Others</a>
+				<a href="productList?page=1&brand=">All Products</a>
+				<a href="productList?page=1&brand=Apple">Apple</a>
+				<a href="productList?page=1&brand=Samsung">Galaxy</a>
+				<a href="productList?page=1&brand=LG">Others</a>
 		</nav>
 		<hr style="margin:10px;">
 	</header>
