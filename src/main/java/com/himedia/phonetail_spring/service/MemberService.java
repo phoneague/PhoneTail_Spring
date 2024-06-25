@@ -15,7 +15,15 @@ public class MemberService {
         return mdao.getMember(userid);
     }
 
-    public int insertMember(MemberDTO mdto) {
-        return mdao.insertMember(mdto);
+    public void insertMember(MemberDTO mdto) {
+        mdao.insertMember(mdto);
+    }
+
+    public int updateMember(MemberDTO mdto) {
+        return mdao.updateMember(mdto);
+    }
+
+    public int deleteMember(String userid) {
+        return mdao.deleteMember(userid);
     }
 }
