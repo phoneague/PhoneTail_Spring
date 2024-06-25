@@ -8,6 +8,6 @@
         SELECT COUNT(*) FROM ${param1} WHERE userid LIKE #{param2}
     </select>
     <select id="getMyReportList" resultType="com.himedia.phonetail_spring.dto.ReportDTO">
-        SELECT * FROM report WHERE userid LIKE #{param3} ORDER BY restate , reseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
+        SELECT * FROM report WHERE userid LIKE #{param2} ORDER BY restate , reseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
     </select>
 </mapper>

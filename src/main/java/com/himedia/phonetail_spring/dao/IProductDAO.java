@@ -23,4 +23,11 @@ public interface IProductDAO {
     void updateProduct(ProductDTO productdto);
 
     void deleteProduct(int pseq);
+
+    int getMyAllCount(String product, String myid);
+
+    List<ProductDTO> getMyProductList(Paging paging, String myid);
+
+    List<ProductDTO> myWantProductList(Paging paging, String myid);
+
 }

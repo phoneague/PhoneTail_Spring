@@ -62,8 +62,41 @@ public class MypageController {
             HashMap<String, Object> result = ms.getMyReportList(request);
             mav.addObject("reportList",result.get("reportList"));
             mav.addObject("paging",result.get("paging"));
-            mav.addObject("key",result.get("key"));
             mav.setViewName("mypage/myReportList");
+        }
+        return mav;
+    }
+
+    @GetMapping("/myProductList")
+    public ModelAndView myProductList(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        String url = "member/loginForm";
+        MemberDTO mdto = (MemberDTO) session.getAttribute("login");
+        if (mdto == null) {
+            mav.setViewName("member/loginForm");
+        } else {
+            HashMap<String, Object> result = ms.getMyProductList(request);
+            mav.addObject("productList",result.get("productList"));
+            mav.addObject("paging",result.get("paging"));
+            mav.setViewName("mypage/myProductList");
+        }
+        return mav;
+    }
+
+    @GetMapping("myWantList")
+    public ModelAndView myWantList(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        String url = "member/loginForm";
+        MemberDTO mdto = (MemberDTO) session.getAttribute("login");
+        if (mdto == null) {
+            mav.setViewName("member/loginForm");
+        } else {
+            HashMap<String, Object> result = ms.getMyWantList(request);
+            mav.addObject("wantList",result.get("wantList"));
+            mav.addObject("paging",result.get("paging"));
+            mav.setViewName("mypage/myWantList");
         }
         return mav;
     }
