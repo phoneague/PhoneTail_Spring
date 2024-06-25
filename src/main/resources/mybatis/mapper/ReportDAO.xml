@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.phonetail_spring.dao.IReportDAO">
+    <select id="getMyAllCount" resultType="_int">
+        SELECT COUNT(*) FROM ${param1} WHERE userid LIKE #{param2}
+    </select>
+    <select id="getMyReportList" resultType="com.himedia.phonetail_spring.dto.ReportDTO">
+        SELECT * FROM report WHERE userid LIKE #{param3} ORDER BY restate , reseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
+    </select>
+</mapper>
