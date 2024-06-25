@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.phonetail_spring.dao.IAdminDAO">
+    <select id="getAdmin" resultType="com.himedia.phonetail_spring.dto.AdminDTO">
+        SELECT *
+        FROM admin
+        WHERE adminid = #{param1}
+    </select>
+    <select id="getAllCount" resultType="_int">
+        SELECT count(*) FROM ${param1} WHERE ${param2} LIKE concat('%',#{param3},'%')
+    </select>
+    <select id="getReportList" resultType="com.himedia.phonetail_spring.dto.ReportDTO">
+        SELECT * FROM report WHERE userid LIKE concat('%',#{param2},'%')  ORDER BY restate,reseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
+    </select>
+
+
+</mapper>
