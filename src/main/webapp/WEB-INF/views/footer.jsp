@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-pageEncoding="UTF-8"%>
 <script src="script/jquery-3.7.1.min.js"></script>
 <link  rel="stylesheet" href="/css/header_footer.css">
 	<div class="clear"></div>
@@ -13,7 +12,7 @@ pageEncoding="UTF-8"%>
 			관리자 접속상태:
 			<c:choose>
 				<c:when test="${!empty adminUser.adminid}">O(${adminUser.adminid})&nbsp;
-					<a href="adminReportList&page=1">관리자 페이지로 이동</a>
+					<a href="adminReportList?page=1">관리자 페이지로 드가자</a>
 					&nbsp;/&nbsp;<a href="adminLogout">로그아웃</a>
 					
 				</c:when>
