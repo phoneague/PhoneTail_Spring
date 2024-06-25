@@ -3,7 +3,7 @@
 
 <div id="productWrap">
     <form name="productInsertForm" method="post"
-          enctype="multipart/form-data">
+          action="productInsert">
         <div class="container">
             <div class="detailInfos">
                 <div class="row">
@@ -37,7 +37,12 @@
                 </div>
                 <div class="row">
                     <div class="coltitle">이미지 등록</div>
-                    <div class="col"><input type="file" name="image"  onChange="show_preview(event)"></div>
+                    <div class="col">
+                        <input type="hidden" name="image" id="image"/> <%--전송될 파일이름--%>
+                        <input type="hidden" name="saveimagefile" id="saveimagefile"/> <%--전송될 파일이름--%>
+
+                        <div id="filename"></div>
+                    </div>
                 </div>
             </div>
             <div class="detailImage">
@@ -45,11 +50,17 @@
             </div>
         </div>
         <div class="button_box">
-            <input type="button" value="상품등록" onClick="go_insert()">
+            <input type="submit" value="상품등록">
             <input type="button" value="목록으로"
                    onClick="location.href='productList'">
         </div>
     </form>
+    <div style="position:relative; border:1px solid black; width:500px; margin:0 auto; top:-150px;">
+        <form name="formm" id="fileupForm" method="post" enctype="multipart/form-data">
+            <input type="file" name="fileimage" />
+            <input type="button" id="myButton" value="추가" />
+        </form>
+    </div>
 </div>
 
 <%@ include file="../footer.jsp" %>
