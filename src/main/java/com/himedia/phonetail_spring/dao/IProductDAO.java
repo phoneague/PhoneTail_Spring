@@ -17,4 +17,8 @@ public interface IProductDAO {
     int getAllCount(String brand, String key, String fieldname);
 
     List<ReportDTO> getProductList(Paging paging, String brand, String key, String fieldname);
+
+    void insertProduct(ProductDTO productdto);
+
+    void updateProduct(ProductDTO productdto);
 }

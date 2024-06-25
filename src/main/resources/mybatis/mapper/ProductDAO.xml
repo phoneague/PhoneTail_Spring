@@ -14,7 +14,7 @@
     </select>
 
     <select id="getAllCount" resultType="_int">
-        select count(*) from product where (brand=COALESCE(NULLIF(#{param2}, ''), brand)) and ${param3} like concat('%',#{param2},'%')
+        select count(*) from product where (brand=COALESCE(NULLIF(#{param1}, ''), brand)) and ${param3} like concat('%',#{param2},'%')
     </select>
 
     <select id="getProductList" resultType="com.himedia.phonetail_spring.dto.ProductDTO">
@@ -25,5 +25,14 @@
             LIMIT #{param1.displayRow}
         OFFSET #{param1.startNum}
     </select>
+
+    <insert id="insertProduct" parameterType="com.himedia.phonetail_spring.dto.ProductDTO">
+        insert into product(brand, model, price, comment, image, saveimagefile, userid)
+        values(#{brand}, #{model}, #{price}, #{comment}, #{image}, #{saveimagefile}, #{userid})
+    </insert>
+
+    <update id="updateProduct" parameterType="com.himedia.phonetail_spring.dto.ProductDTO">
+        update product set brand=#{brand}, model=#{model}, price=#{price}, comment=#{comment}, image=#{image}, saveimagefile=#{saveimagefile} where pseq=#{pseq}
+    </update>
 
 </mapper>
