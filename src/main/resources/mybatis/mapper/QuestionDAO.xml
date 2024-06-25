@@ -10,4 +10,10 @@
     <update id="updateReadCount">
         UPDATE question SET readCount = readCount + 1 WHERE qseq = ${param1}
     </update>
+    <select id="getMyAllCount" resultType="_int">
+        SELECT count(*) FROM ${param1} WHERE ${param3} LIKE concat('%', #{param4}, '%') AND userid LIKE #{param2}
+    </select>
+    <select id="getMyQnaList" resultType="com.himedia.phonetail_spring.dto.QuestionDTO">
+        SELECT * FROM question WHERE title LIKE CONCAT('%',#{param2},'%') AND userid LIKE #{param3} ORDER BY indate DESC, qseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
+    </select>
 </mapper>
