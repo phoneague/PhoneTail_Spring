@@ -13,7 +13,6 @@ select*from question;
 select * from wantlist;
 
 -- 기존 테이블 삭제
--- DROP TABLE IF EXISTS address;
 DROP TABLE IF EXISTS wantlist;
 DROP TABLE IF EXISTS admin;
 DROP TABLE IF EXISTS chat;
@@ -22,17 +21,6 @@ DROP TABLE IF EXISTS report;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS question;
 DROP TABLE IF EXISTS member;
-
--- 테이블 생성
--- CREATE TABLE address
-    -- (
---    zip_num varchar(15),
---    sido varchar(30),
---    gugun varchar(30),
---    dong varchar(30),
---    bunji varchar(20),
---    zip_code varchar(30)
-          -- );
 
 CREATE TABLE admin
 (
@@ -52,10 +40,12 @@ CREATE TABLE member
     email varchar(100) NOT NULL,
     address1 varchar(100) NOT NULL,
     address2 varchar(100) NOT NULL,
+    address3 varchar(100),
     userstate char(1) DEFAULT 'Y' NOT NULL,
     indate datetime DEFAULT now() NOT NULL,
     PRIMARY KEY (userid)
 );
+
 
 CREATE TABLE product
 (
@@ -162,12 +152,24 @@ ALTER TABLE report
 ALTER TABLE chatlist
     ADD FOREIGN KEY (pseq) REFERENCES product (pseq) ON UPDATE CASCADE ON DELETE CASCADE;
 
-CREATE VIEW hak AS
+ALTER TABLE `phonetail`.`member`
+    ADD COLUMN `zip_num` VARCHAR(15) NULL AFTER `email`,
+    ADD COLUMN `provider` VARCHAR(45) NULL AFTER `indate`,
+    CHANGE COLUMN `address3` `address3` VARCHAR(100) NULL DEFAULT NULL AFTER `address2`,
+    CHANGE COLUMN `pwd` `pwd` VARCHAR(45) NULL ,
+    CHANGE COLUMN `name` `name` VARCHAR(45) NULL ,
+    CHANGE COLUMN `phone` `phone` VARCHAR(45) NULL ,
+    CHANGE COLUMN `email` `email` VARCHAR(100) NULL ,
+    CHANGE COLUMN `address1` `address1` VARCHAR(100) NULL ,
+    CHANGE COLUMN `address2` `address2` VARCHAR(100) NULL ;
+
+
+CREATE OR REPLACE VIEW hak AS
 SELECT cl.lseq, cl.sid, cl.bid, p.pseq, p.model, p.price
 FROM chatlist cl
          JOIN product p ON cl.pseq = p.pseq;
 
-CREATE VIEW hakk AS
+CREATE OR REPLACE VIEW hakk AS
 SELECT
     p.model AS model,
     p.price AS price,
@@ -200,11 +202,6 @@ FROM
     product p
         JOIN
     wantlist w ON p.pseq = w.pseq;
-
--- 수정 전 new_product
-create or replace view new_product
-as
-select pseq, model, price, image, saveimagefile, userid from product where sellstate='N' order by indate desc limit 3;
 
 -- 수정된 new_product
 CREATE OR REPLACE VIEW new_product AS
@@ -451,12 +448,6 @@ INSERT INTO report (pseq, userid, retype, recontent, restate) VALUES
                                                                   (2, 'user2', 2, '거래를 거부해요.', 'N'),
                                                                   (1, 'user1', 3, '사기 의심돼요.', 'N'),
                                                                   (2, 'user2', 4, '전문업자 같아요.', 'N');
-
-
-
-
-
-
 
 
 

@@ -10,5 +10,5 @@ import java.util.List;
 public interface IReportDAO {
     int getMyAllCount(String report, String myid);
 
-    List<ReportDTO> getMyReportList(Paging paging, String key, String myid);
+    List<ReportDTO> getMyReportList(Paging paging, String myid);
 }
