@@ -7,5 +7,9 @@
     <select id="getMember" resultType="com.himedia.phonetail_spring.dto.MemberDTO">
         SELECT * FROM member WHERE userid = #{param1}
     </select>
+    <insert id="insertMember" parameterType="com.himedia.phonetail_spring.dto.MemberDTO">
+        insert into member(userid, pwd, name, phone, email, address1, address2, address3)
+        VALUES (#{userid}, #{pwd}, #{name}, #{phone}, #{email}, #{address1}, #{address2}, #{address3})
+    </insert>
 
 </mapper>
