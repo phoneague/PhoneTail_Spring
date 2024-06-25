@@ -97,6 +97,22 @@ public class AdminController {
         return mav;
     }
 
+    @GetMapping("/adminMemberList")
+    public ModelAndView adminMemberList(HttpServletRequest request) throws IOException {
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("adminUser") == null) {
+            mav.setViewName("admin/adminLogin");
+        } else {
+            HashMap<String, Object> result = as.getAdminMemberList(request);
+            mav.addObject("memberList",result.get("memberList"));
+            mav.addObject("paging",result.get("paging"));
+            mav.addObject("key",result.get("key"));
+            mav.setViewName("admin/member/adminMemberList");
+        }
+        return mav;
+    }
+
 
 
 }

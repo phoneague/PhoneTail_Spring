@@ -18,6 +18,17 @@
     <select id="getQnaList" resultType="com.himedia.phonetail_spring.dto.QuestionDTO">
         SELECT * FROM question WHERE userid LIKE concat('%',#{param2},'%')  ORDER BY indate,qseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
     </select>
+    <select id="getMemberList" resultType="com.himedia.phonetail_spring.dto.MemberDTO">
+        SELECT * FROM member WHERE userid LIKE concat('%',#{param2},'%')  ORDER BY indate DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
+    </select>
+
+<!--    <select id="getMemberAllCount" resultType="_int">-->
+<!--        SELECT count(*) FROM ${param1} WHERE ${param2} LIKE concat('%',#{param3},'%')-->
+<!--        <if test = "userstate != null AND !userstate.isEmpty()">-->
+<!--             AND userstate = ?-->
+<!--        </if>-->
+
+<!--    </select>-->
 
 
 </mapper>

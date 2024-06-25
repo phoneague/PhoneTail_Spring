@@ -35,4 +35,15 @@
         update product set brand=#{brand}, model=#{model}, price=#{price}, comment=#{comment}, image=#{image}, saveimagefile=#{saveimagefile} where pseq=#{pseq}
     </update>
 
+    <select id="getMyAllCount" resultType="_int">
+        SELECT COUNT(*) FROM ${param1} WHERE userid LIKE #{param2}
+    </select>
+    <select id="getMyProductList" resultType="com.himedia.phonetail_spring.dto.ProductDTO">
+        SELECT * FROM product WHERE userid LIKE #{param2} ORDER BY indate , pseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
+    </select>
+    <select id="myWantProductList" resultType="com.himedia.phonetail_spring.dto.ProductDTO">
+        SELECT * FROM wantlist_view WHERE wuserid=#{param2} ORDER BY indate DESC, pseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
+    </select>
+
+
 </mapper>
