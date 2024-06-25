@@ -80,8 +80,27 @@
 
             </div>
     </form>
-    <jsp:include page="../paging/paging.jsp">
-        <jsp:param value="productList" name="address" />
-    </jsp:include>
+
+    <div class="paging" >
+        <!-- prev 버튼 표시 여부 -->
+        <c:if test="${paging.prev}">
+            <a href="productList?brand=${brand}&page=${paging.beginPage-1}">◀</a>&nbsp;
+        </c:if>
+
+        <!--  beginPage 부터  endPage 까지 일렬로 페이지를 표시 -->
+        <c:forEach begin="${paging.beginPage}" end="${paging.endPage}"  var="index">
+            <c:if test="${paging.page == index}">
+                <span style="color:red">&nbsp;${index}&nbsp;</span>
+            </c:if>
+            <c:if test="${paging.page != index}">
+                <a href="productList?brand=${brand}&page=${index}">&nbsp;${index}&nbsp;</a>
+            </c:if>
+        </c:forEach>
+
+        <!-- next 버튼 표시 여부 -->
+        <c:if test="${paging.next}">
+            <a href="productList?brand=${brand}&page=${paging.endPage+1}">▶</a>
+        </c:if>
+    </div>
 </div>
 <%@ include file="../footer.jsp" %>

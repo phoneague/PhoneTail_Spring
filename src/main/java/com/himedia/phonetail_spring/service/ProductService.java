@@ -85,4 +85,12 @@ public class ProductService {
         return result;
 
     }
+
+    public void insertProduct(ProductDTO productdto) {
+        pdao.insertProduct(productdto);
+    }
+
+    public void updateProduct(ProductDTO productdto) {
+        pdao.updateProduct(productdto);
+    }
 }

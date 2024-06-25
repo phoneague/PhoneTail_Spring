@@ -51,6 +51,6 @@ public class MemberController {
         return "member/joinForm";
     }
 
-    @
+
 
 }
