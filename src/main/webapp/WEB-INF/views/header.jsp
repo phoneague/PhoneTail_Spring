@@ -94,10 +94,10 @@
         </nav>
         <br>
         <nav id="category_menu">
-            <a href="productList?page=1&brand=">All Products</a>
-            <a href="productList?page=1&brand=Apple">Apple</a>
-            <a href="productList?page=1&brand=Samsung">Galaxy</a>
-            <a href="productList?page=1&brand=LG">Others</a>
+            <a href="productList?page=1&key=&brand=">All Products</a>
+            <a href="productList?page=1&key=&brand=Apple">Apple</a>
+            <a href="productList?page=1&key=&brand=Samsung">Galaxy</a>
+            <a href="productList?page=1&key=&brand=LG">Others</a>
         </nav>
         <hr style="margin:10px;">
     </header>

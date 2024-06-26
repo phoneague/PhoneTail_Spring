@@ -38,6 +38,7 @@ public class ProductController {
         System.out.println(result.get("paging"));
         mav.addObject("brand", result.get("brand"));
         mav.addObject("key", result.get("key"));
+        mav.addObject("sellstate", result.get("sellstate"));
         mav.setViewName("product/productList");
 
         return mav;
@@ -45,6 +46,16 @@ public class ProductController {
 
     @GetMapping("/productDetail")
     public ModelAndView productDetail(@RequestParam("pseq") int pseq){
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("productDTO", ps.getProduct(pseq));
+        ps.plusReadcount(pseq);
+        mav.setViewName("product/productDetail");
+
+        return mav;
+    }
+
+    @GetMapping("/productDetailWithoutCnt")
+    public ModelAndView productDetailWithoutCnt(@RequestParam("pseq") int pseq){
         ModelAndView mav = new ModelAndView();
         mav.addObject("productDTO", ps.getProduct(pseq));
         mav.setViewName("product/productDetail");
@@ -142,7 +153,7 @@ public class ProductController {
     @PostMapping("/productUpdate")
     public String productUpdate(@ModelAttribute("dto") @Valid ProductDTO productdto,
                                 BindingResult result, Model model, RedirectAttributes redirectAttributes){
-        String url = "redirect:/productUpdateForm";
+        String url = "redirect:/productUpdateForm?pseq=" + productdto.getPseq();
         if (result.hasErrors()) {
             String errorMessage = result.getFieldError().getDefaultMessage();
             model.addAttribute("message", errorMessage);
@@ -151,7 +162,7 @@ public class ProductController {
             return url;
         } else{
             ps.updateProduct(productdto);
-            url = "redirect:/productList";
+            url = "redirect:productDetailWithoutCnt?pseq=" + productdto.getPseq();
 
             return url;
         }
@@ -163,7 +174,20 @@ public class ProductController {
         return "redirect:/productList";
     }
 
+    @GetMapping("/productSold")
+    public String productSold(@RequestParam("pseq") int pseq){
+        ps.soldProduct(pseq);
+        return "redirect:/productDetailWithoutCnt?pseq="+pseq;
+    }
 
 
+    @GetMapping("/productWant")
+    public ModelAndView productWant(@RequestParam("pseq") int pseq, @RequestParam("userid") String userid){
+        ModelAndView mav = new ModelAndView();
+
+
+
+        return mav;
+    }
 
 }

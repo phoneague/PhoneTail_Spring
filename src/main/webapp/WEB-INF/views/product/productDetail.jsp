@@ -7,6 +7,7 @@
             <div class="row">
                 <div class="coltitle">상품번호</div>
                 <div class="col">${productDTO.pseq}</div>
+                <input type="hidden" name="pseq" value="${productDTO.pseq}" />
             </div>
             <div class="row">
                 <div class="coltitle">판매자</div>
