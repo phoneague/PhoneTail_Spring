@@ -16,7 +16,7 @@ public interface IProductDAO {
 
     int getAllCount(String brand, String sellstate, String key, String fieldname);
 
-    List<ReportDTO> getProductList(Paging paging, String brand, String sellstate, String key, String fieldname);
+    List<ProductDTO> getProductList(Paging paging, String brand, String sellstate, String key, String fieldname);
 
     void insertProduct(ProductDTO productdto);
 
@@ -33,4 +33,8 @@ public interface IProductDAO {
     void plusReadcount(int pseq);
 
     void sold(int pseq);
+
+    void plusWantcount(int pseq);
+
+    void minusWantcount(int pseq);
 }

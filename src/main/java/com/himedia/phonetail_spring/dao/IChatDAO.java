@@ -9,6 +9,6 @@ import java.util.List;
 @Mapper
 public interface IChatDAO {
     List<ChatListDTO> chatList(String key, String userid1, String userid2);
-    ChatingDTO getChating(int lseq);
+    List<ChatingDTO> getChating(int lseq);
     List<ChatListDTO> getChatList(int lseq);
 }

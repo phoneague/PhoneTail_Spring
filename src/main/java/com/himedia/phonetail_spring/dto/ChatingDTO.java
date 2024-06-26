@@ -10,6 +10,5 @@ public class ChatingDTO {
     private String content;
     private Timestamp indate;
     private String userid;
-    private String model;
     private int lseq;
 }
