@@ -25,23 +25,14 @@ public class CustomerService {
         return qdao.getQna(qseq);
     }
 
-    public int getAllCount(String tableName, String columnName, String key) {
-        return qdao.getAllCount(columnName, key);
-    }
-
-    public void insertQna(QuestionDTO qdto) {
-        qdao.insertQna(qdto);
-    }
-
     public void deleteQna(int qseq) {
         qdao.deleteQna(qseq);
     }
 
-
     public HashMap<String, Object> getQuestionList(HttpServletRequest request) {
+
         HashMap<String, Object> result = new HashMap<>();
         HttpSession session = request.getSession();
-
         // page 구분
         int page =1;
         if(request.getParameter("page")!=null){
@@ -53,7 +44,7 @@ public class CustomerService {
             session.removeAttribute("page");
         }
 
-        // 검색어 구분(userid)
+        // 검색어 구분(model)
         String key="";
         if(request.getParameter("key")!=null){
             key=request.getParameter("key");
@@ -71,12 +62,14 @@ public class CustomerService {
         paging.setTotalCount(count);
         paging.calPaing();
         paging.setStartNum(paging.getStartNum()-1);
-        List<QuestionDTO> questionList = qdao.getAllQuestions(paging,key,"userid");
+        List<QuestionDTO> questionList = qdao.getAllQuestions(paging, key, "userid");
         result.put("questionList", questionList);
         result.put("paging", paging);
         result.put("key", key);
         return result;
+
     }
+
 
     public void writeQna(String userid, String title, String content, boolean secret) {
         qdao.writeQna(userid, title, content, secret);

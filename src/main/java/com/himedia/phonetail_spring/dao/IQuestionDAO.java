@@ -9,8 +9,6 @@ import java.util.List;
 @Mapper
 public interface IQuestionDAO {
 
-    void insertQna(QuestionDTO qdto);
-
     void deleteQna(int qseq);
 
     void updateReadCount(int qseq);

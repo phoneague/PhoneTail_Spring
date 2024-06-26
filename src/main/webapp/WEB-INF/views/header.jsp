@@ -32,7 +32,7 @@
     <script src="/script/report.js"></script>
     <script src="chat/ChatList.js"></script>
     <script src="script/member.js"></script>
-    <script src="customer/script/customer.js"></script>
+    <script src="/script/question.js"></script>
 <%--    <script type="text/javascript">--%>
 <%--        $(function () {--%>
 <%--            $('#myButton').click(function () {--%>

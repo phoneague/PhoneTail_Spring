@@ -4,15 +4,15 @@
     <h2>Q&A</h2>
 </div>
 <div class="container">
-    <form method="post" name="frm">
+    <form name="frm">
         <div class="litb">
             <div class="row">
                 <div class="col" style="display: flex; align-items:right;">
                     <input type="text" name="key" value="${key}" /> &nbsp;
                     &nbsp; &nbsp;
-                    <input class="searchbtn" type="button" name="btn_search" value="검색" onClick="go_search('qnaList')"/>
+                    <input class="searchbtn" type="button" name="btn_search" value="검색" onclick="go_search('qnaList')"/>
                     &nbsp;&nbsp;&nbsp;
-                    <input class="searchbtn" type="button" name="btn_search" value="글 작성" onClick="location.href='writeQnaForm'"/>
+                    <input class="searchbtn" type="button" name="btn_search" value="글 작성" onclick="location.href='writeQnaForm'"/>
                     &nbsp;&nbsp;&nbsp;
                 </div>
             </div>
@@ -45,13 +45,13 @@
                         </c:otherwise>
                     </c:choose>
                     <div class="col"><fmt:formatDate value="${qna.indate}" type="date"/></div>
-                    <div class="col">${qna.qreply == '' ? 'NO' : 'YES'}</div>
+                    <div class="col">${qna.qreply == null ? 'NO' : 'YES'}</div>
                     <div class="col">${qna.readCount}</div>
                     <div class="col">${qna.secret == true ? '비밀글입니다' : ''}</div>
                 </div>
             </c:forEach>
         </div>
-        <jsp:include page="../paging/paging.jsp">
+        <jsp:include page="../paging.jsp">
             <jsp:param value="qnaList" name="address" />
         </jsp:include>
     </form>

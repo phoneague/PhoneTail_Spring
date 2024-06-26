@@ -96,7 +96,6 @@ public class CustomerController {
                 cs.writeQna(login.getUserid(), title, content, secret);
             }
         }
-
         return url;
     }
 

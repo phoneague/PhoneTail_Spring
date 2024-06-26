@@ -25,8 +25,8 @@
                     </div>
                 </div>
                 <div class="loginbtn">
-                    <input type="button" value="제출하기" onClick="go_write()"/>
-                    <input type="button" value="목록으로" onClick="location.href='qnaList'" />
+                    <input type="submit" value="제출하기" onclick="go_write()"/>
+                    <input type="button" value="목록으로" onclick="location.href='qnaList'" />
                 </div>
             </form>
         </article>
