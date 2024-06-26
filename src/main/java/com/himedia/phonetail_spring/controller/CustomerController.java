@@ -12,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -21,55 +23,47 @@ public class CustomerController {
     CustomerService cs;
 
     @GetMapping("/qnaList")
-    public String qnaList(
+    public ModelAndView qnaList(
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "key", defaultValue = "") String key,
-            HttpSession session,
+            HttpServletRequest request,
             Model model) {
 
-        MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
-        if (loginUser == null) {
-            return "redirect:/loginForm";
-        }
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
 
-        if (!key.isEmpty()) {
-            session.setAttribute("key", key);
-        } else if (session.getAttribute("key") != null) {
-            key = (String) session.getAttribute("key");
+        String url = "customer/qnaList";
+        MemberDTO mdto = (MemberDTO) session.getAttribute("login");
+
+        MemberDTO loginUser = (MemberDTO) session.getAttribute("login");
+        if (mdto == null) {
+            mav.setViewName("member/loginForm");
         } else {
-            session.removeAttribute("key");
+            HashMap<String, Object> result = cs.getQuestionList(request);
+            mav.addObject("questionList", result.get("questionList"));
+            mav.addObject("paging", result.get("paging"));
+            mav.addObject("key", result.get("key"));
+            mav.setViewName("customer/qnaList");
         }
-
-        Paging paging = new Paging();
-        paging.setPage(page);
-
-        int count = cs.getAllCount("question", "userid", key);
-        paging.setTotalCount(count);
-
-        List<QuestionDTO> questionList = cs.getAllQuestions(paging, key);
-
-        model.addAttribute("paging", paging);
-        model.addAttribute("questionList", questionList);
-
-        return "customer/qnaList";
+        return mav;
     }
 
-    @GetMapping("qnaView")
-    public String qnaView(@RequestParam("qseq")int qseq, Model model) {
+    @GetMapping("/qnaView")
+    public String qnaView(@RequestParam("qseq") int qseq, Model model) {
         cs.updateReadCount(qseq);
         model.addAttribute("QuestionDTO", cs.getQna(qseq));
         return "customer/qnaView";
     }
 
-    @GetMapping("/writeQnaForm")
+
+    @GetMapping ("/writeQnaForm")
     public String writeQnaForm(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        MemberDTO loginUser = (MemberDTO) session.getAttribute("login");
+        MemberDTO login = (MemberDTO) session.getAttribute("login");
 
-        if (loginUser == null) {
+        if (login == null) {
             return "redirect:/loginForm";
         } else {
-            model.addAttribute("loginUser", loginUser.getUserid());
             return "customer/writeQnaForm";
         }
     }
@@ -78,36 +72,36 @@ public class CustomerController {
     @PostMapping("/writeQna")
     public String writeQna(
             HttpServletRequest request,
-            @RequestParam(value = "secret", required = false, defaultValue = "N") boolean secret,
+            @RequestParam(value = "secret", required = false, defaultValue = "false") String secretStr,
             @RequestParam("title") String title,
             @RequestParam("content") String content,
             Model model) {
 
         HttpSession session = request.getSession();
-        MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
+        MemberDTO login = (MemberDTO) session.getAttribute("login");
+        String url = "customer/writeQnaForm";
 
-        if (loginUser == null) {
+        if (login == null) {
             return "redirect:/loginForm";
+        } else {
+            if (title == null || title.isEmpty()) {
+                model.addAttribute("message", "제목을 입력하세요");
+                return url;
+            } else if (content == null || content.isEmpty()) {
+                model.addAttribute("message", "내용을 입력하세요");
+                return url;
+            } else {
+                boolean secret = Boolean.parseBoolean(secretStr); // 문자열을 boolean으로 변환
+                url = "redirect:/qnaList";
+                cs.writeQna(login.getUserid(), title, content, secret);
+            }
         }
 
-        if (title == null || title.isEmpty()) {
-            model.addAttribute("message", "제목을 입력하세요");
-            return "customer/writeQnaForm";
-        } else if (content == null || content.isEmpty()) {
-            model.addAttribute("message", "내용을 입력하세요");
-            return "customer/writeQnaForm";
-        } else {
-            QuestionDTO qdto = new QuestionDTO();
-            qdto.setUserid(loginUser.getUserid());
-            qdto.setTitle(title);
-            qdto.setContent(content);
-            qdto.setSecret(secret);
-            cs.insertQna(qdto);
-            return "redirect:/qnaList";
-        }
+        return url;
     }
 
-    @PostMapping("/deleteQna")
+
+    @GetMapping("/deleteQna")
     public String deleteQna(@RequestParam("qseq") int qseq) {
         cs.deleteQna(qseq);
         return "redirect:/qnaList";

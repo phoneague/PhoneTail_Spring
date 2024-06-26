@@ -9,10 +9,6 @@ import java.util.List;
 @Mapper
 public interface IQuestionDAO {
 
-    List<QuestionDTO> getQnaList();
-
-    /*void writeQna(String userid, String title, String content, boolean secret);*/
-
     void insertQna(QuestionDTO qdto);
 
     void deleteQna(int qseq);
@@ -25,7 +21,9 @@ public interface IQuestionDAO {
 
     List<QuestionDTO> getMyQnaList(Paging paging, String key, String myid);
 
-    List<QuestionDTO> getAllQuestions(Paging paging, String key);
+    List<QuestionDTO> getAllQuestions(Paging paging, String key, String fieldname);
 
-    int getAllCount(String tableName, String columnName, String key);
+    int getAllCount(String fieldname, String key);
+
+    void writeQna(String userid, String title, String content, boolean secret);
 }
