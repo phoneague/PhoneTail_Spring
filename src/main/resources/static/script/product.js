@@ -27,11 +27,11 @@ function go_want(pseq, userid) {
 
 
 function sold(pseq) {
+
     let answer = confirm("거래를 완료하셨나요?");
     if (answer) {
         window.location.href = "productSold?pseq=" + pseq;
     }
-
 }
 
 

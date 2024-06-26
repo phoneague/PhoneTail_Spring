@@ -7,12 +7,10 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -80,6 +78,30 @@ public class AdminController {
             mav.setViewName("admin/report/adminReportList");
         }
         return mav;
+    }
+
+    @GetMapping("/reportView")
+    public String reportView(@RequestParam("reseq") int reseq, HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        String url = "admin/adminLogin";
+        if (session.getAttribute("adminUser") == null) {
+            url="admin/adminLogin";
+        } else {
+            model.addAttribute("reportDTO",as.getReportView(reseq));
+            url="report/reportView";
+        }
+        return url;
+    }
+
+    @PostMapping("/processReport")
+    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
+    @ResponseBody
+    public HashMap<String,Object> processReport(@RequestParam("newRestate")String newRestate,@RequestParam("oldRestate")String oldRestate, @RequestParam("reseq")int reseq, @RequestParam("pid")String pid){
+        HashMap<String,Object> result = new HashMap<>();
+        int status = as.processReport(newRestate,oldRestate, reseq, pid);
+        result.put("status",status);
+        System.out.println("status : "+status);
+        return result;
     }
 
     @GetMapping("/adminQnaList")

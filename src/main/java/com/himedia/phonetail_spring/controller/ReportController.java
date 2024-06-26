@@ -2,8 +2,10 @@ package com.himedia.phonetail_spring.controller;
 
 import com.himedia.phonetail_spring.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,5 +33,18 @@ public class ReportController {
             result.put("status",3);
         }
         return result;
+    }
+
+    @GetMapping("/myReportView")
+    public String reportView(@RequestParam("reseq") int reseq, HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        String url = "member/loginForm";
+        if (session.getAttribute("login") == null) {
+            url="member/loginForm";
+        } else {
+            model.addAttribute("reportDTO",rs.getReportView(reseq));
+            url="report/reportView";
+        }
+        return url;
     }
 }
