@@ -11,4 +11,6 @@ public interface IReportDAO {
     int getMyAllCount(String report, String myid);
 
     List<ReportDTO> getMyReportList(Paging paging, String myid);
+
+    void insertReport(int pseq, String userid, int retype, String recontent);
 }
