@@ -13,7 +13,7 @@
 							<label>Password</label><input name="pwd" type="password" >
 					</div>
 					<div class="loginbtn">
-								<input type="submit" value="Kakao Login" style="background: #FEE500; color:black" onclick="location.href='kakaostart'"/>
+								<input type="button" value="Kakao Login" style="background: #FEE500; color:black" onclick="location.href='kakaostart'"/>
 								<input type="submit" value="Login" />
 	  				        	<input type="button" value="Find ID"  onClick="find_id()"/>
 	  				        	<input type="button" value="Find PW"  onClick="find_pw()"/>

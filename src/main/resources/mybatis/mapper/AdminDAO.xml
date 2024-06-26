@@ -19,16 +19,20 @@
         SELECT * FROM question WHERE userid LIKE concat('%',#{param2},'%')  ORDER BY indate,qseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
     </select>
     <select id="getMemberList" resultType="com.himedia.phonetail_spring.dto.MemberDTO">
-        SELECT * FROM member WHERE userid LIKE concat('%',#{param2},'%')  ORDER BY indate DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
+        SELECT * FROM member
+        WHERE userid LIKE concat('%', #{param2}, '%')
+        <if test="userstate != null and !userstate.isEmpty()">
+            AND userstate = #{userstate}
+        </if>
+        ORDER BY indate DESC
+        LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
     </select>
-
-<!--    <select id="getMemberAllCount" resultType="_int">-->
-<!--        SELECT count(*) FROM ${param1} WHERE ${param2} LIKE concat('%',#{param3},'%')-->
-<!--        <if test = "userstate != null AND !userstate.isEmpty()">-->
-<!--             AND userstate = ?-->
-<!--        </if>-->
-
-<!--    </select>-->
-
+    <select id="getMemberAllCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM member
+        WHERE name LIKE CONCAT('%', #{key}, '%')
+        <if test="userstate != null and !userstate.isEmpty()">
+            AND userstate = #{userstate}
+        </if>
+    </select>
 
 </mapper>

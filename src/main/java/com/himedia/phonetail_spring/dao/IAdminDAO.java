@@ -16,7 +16,7 @@ public interface IAdminDAO {
 
     List<QuestionDTO> getQnaList(Paging paging, String key);
 
-    List<MemberDTO> getMemberList(Paging paging, String key);
+    List<MemberDTO> getMemberList(Paging paging, String key, String userstate);
 
     int getMemberAllCount(String member, String name, String key, String userstate);
 }

@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class AdminController {
         return url;
     }
 
-    @PostMapping("adminLogin")
+    @PostMapping("/adminLogin")
     public String adminLogin(@ModelAttribute("dto") @Valid AdminDTO admindto, BindingResult bindingResult, HttpServletRequest request, Model model) throws IOException {
         String url = "admin/adminLogin";
         if (bindingResult.getFieldError("adminid") != null) {
@@ -81,7 +82,7 @@ public class AdminController {
         return mav;
     }
 
-    @GetMapping("adminQnaList")
+    @GetMapping("/adminQnaList")
     public ModelAndView adminQnaList(HttpServletRequest request) throws IOException {
         ModelAndView mav = new ModelAndView();
         HttpSession session = request.getSession();
@@ -104,15 +105,69 @@ public class AdminController {
         if (session.getAttribute("adminUser") == null) {
             mav.setViewName("admin/adminLogin");
         } else {
-            HashMap<String, Object> result = as.getAdminMemberList(request);
-            mav.addObject("memberList",result.get("memberList"));
-            mav.addObject("paging",result.get("paging"));
-            mav.addObject("key",result.get("key"));
+            String key = request.getParameter("key");
+            String userstate = request.getParameter("userstate");
+            HashMap<String, Object> result = as.getAdminMemberList(request, key, userstate); // key와 userstate 파라미터 전달
+            mav.addObject("memberList", result.get("memberList"));
+            mav.addObject("paging", result.get("paging"));
+            mav.addObject("key", key);
+            mav.addObject("userstate", userstate);
             mav.setViewName("admin/member/adminMemberList");
         }
         return mav;
     }
 
 
+
+    @GetMapping("/adminUserStateChangeBtoY")
+    public ModelAndView adminUserStateChangeBtoY(HttpServletRequest request) throws IOException {
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("adminUser") == null) {
+            mav.setViewName("admin/adminLogin");
+        } else {
+            String [] userstate = request.getParameterValues("userstate");
+            for(String userid : userstate) {
+                as.stateChangeBtoY(userid);
+            }
+            mav.setViewName("admin/member/adminMemberList");
+            return mav;
+        }
+        return mav;
+    }
+
+    @GetMapping("/adminUserStateChangeNtoY")
+    public ModelAndView adminUserStateChangeNtoY(HttpServletRequest request) throws IOException {
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("adminUser") == null) {
+            mav.setViewName("admin/adminLogin");
+        } else {
+            String [] userstate = request.getParameterValues("userstate");
+            for(String userid : userstate) {
+                as.stateChangeNtoY(userid);
+            }
+            mav.setViewName("admin/member/adminMemberList");
+            return mav;
+        }
+        return mav;
+    }
+
+    @GetMapping("/adminUserStateChangeYtoB")
+    public ModelAndView adminUserStateChangeYtoB(HttpServletRequest request) throws IOException {
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("adminUser") == null) {
+            mav.setViewName("admin/adminLogin");
+        } else {
+            String [] userstate = request.getParameterValues("userstate");
+            for(String userid : userstate) {
+                as.stateChangeYtoB(userid);
+            }
+            mav.setViewName("admin/member/adminMemberList");
+            return mav;
+        }
+        return mav;
+    }
 
 }
