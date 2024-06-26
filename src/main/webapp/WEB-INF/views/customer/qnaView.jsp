@@ -11,7 +11,7 @@
                 <fmt:formatDate value="${QuestionDTO.indate}" type="both" />
             </div>
             <div class="vifield">
-                <label>${QuestionDTO.qreply == '' ? '답변대기' : '답변완료'} | ${QuestionDTO.secret == true ? '비밀글' : '공개글'}</label>
+                <label>${empty QuestionDTO.qreply ? '답변대기' : '답변완료'} | ${QuestionDTO.secret == true ? '비밀글' : '공개글'}</label>
             </div>
         </div>
         <div class="vicontent">

@@ -1,10 +1,10 @@
-function go_search(command){
-    var url="phonetail.do?command=" +command+ "&page=1"
-    document.frm.action = url;
-    document.frm.submit();
+function go_search(command) {
+    var form = document.forms[0];
+    form.action = "/" + command + "?page=1";
+    form.submit();
 }
 function go_write(){
-    let Form = document.writeQnaForm;
+    let Form = document.writeQnaForm.submit();
     if (Form.title.value == "") {
         alert('제목을 입력하세요');
         Form.title.focus();
