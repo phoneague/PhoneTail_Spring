@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.phonetail_spring.dao.IChatDAO">
+
+    <select id="getChatList" resultType="com.himedia.phonetail_spring.dto.ChatListDTO">
+    <![CDATA[
+        SELECT * FROM (
+                          SELECT model, price, pseq, lseq, sid, bid, indate, content,
+                                 ROW_NUMBER() OVER (PARTITION BY lseq ORDER BY indate DESC) AS row_num
+                          FROM hakk
+                          WHERE model LIKE CONCAT('%', #{param1}, '%')
+                            AND (sid = #{param2} OR bid = #{param3})
+                      ) AS subquery
+        WHERE row_num = 1
+        ORDER BY indate DESC
+        ]]>
+</select>
+</mapper>
