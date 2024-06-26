@@ -59,7 +59,7 @@
                 <input type="hidden" name="oldsaveimagefile" value="${ProductDTO.saveimagefile}">
             </div>
             <div class="detailImage">
-                <img id="preview" src="product/images/${ProductDTO.saveimagefile}" width="600" />
+                <img id="preview" src="/product_images/${ProductDTO.saveimagefile}" width="600" />
             </div>
         </div>
         <div class="button_box">
@@ -73,7 +73,7 @@
             <div class="col">${message}</div>
         </div>
     </form>
-    <div style="position:relative; border:1px solid black; width:500px; margin:0 auto; top:-150px;">
+    <div style="position:relative; border:1px solid black; width:500px; margin:0 auto;">
         <form name="formm" id="fileupForm" method="post" enctype="multipart/form-data">
             <input type="file" name="fileimage" />
             <input type="button" id="myButton" value="추가" />

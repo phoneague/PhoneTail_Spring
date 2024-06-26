@@ -14,13 +14,14 @@
     </select>
 
     <select id="getAllCount" resultType="_int">
-        select count(*) from product where (brand=COALESCE(NULLIF(#{param1}, ''), brand)) and ${param3} like concat('%',#{param2},'%')
+        select count(*) from product where brand like concat('%',#{param1},'%') and sellstate like concat('%',#{param2},'%') and ${param4} like concat('%',#{param3},'%')
     </select>
 
     <select id="getProductList" resultType="com.himedia.phonetail_spring.dto.ProductDTO">
         SELECT * FROM product
-        WHERE (brand = COALESCE(NULLIF(#{param2}, ''), brand))
-          AND ${param4} LIKE concat('%',#{param3},'%')
+        WHERE brand like concat('%',#{param2},'%')
+          AND sellstate like concat('%',#{param3},'%')
+          AND ${param5} LIKE concat('%',#{param4},'%')
         ORDER BY pseq DESC
             LIMIT #{param1.displayRow}
         OFFSET #{param1.startNum}
@@ -49,5 +50,12 @@
         SELECT * FROM wantlist_view WHERE wuserid=#{param2} ORDER BY indate DESC, pseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
     </select>
 
+    <update id="plusReadcount">
+        UPDATE product SET readcount = readcount + 1 WHERE pseq = #{param1}
+    </update>
+
+    <update id="sold">
+        UPDATE product set sellstate = 'Y' where pseq=#{param1}
+    </update>
 
 </mapper>

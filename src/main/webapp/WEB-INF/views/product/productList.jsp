@@ -2,7 +2,7 @@
 <%@ include file="../header.jsp" %>
 <link rel="stylesheet" href="css/product.css">
 <div id="productWrap">
-    <form name="productListForm" method="post">
+    <form name="productListForm" method="get">
         <div class="row">
             <div class="title">
                 <h1>Product List</h1>

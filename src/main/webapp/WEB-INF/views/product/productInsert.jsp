@@ -60,7 +60,7 @@
             <div class="col">${message}</div>
         </div>
     </form>
-    <div style="position:relative; border:1px solid black; width:500px; margin:0 auto; top:-150px;">
+    <div style="position:relative; border:1px solid black; width:500px; margin:0 auto;">
         <form name="formm" id="fileupForm" method="post" enctype="multipart/form-data">
             <input type="file" name="fileimage" />
             <input type="button" id="myButton" value="추가" />

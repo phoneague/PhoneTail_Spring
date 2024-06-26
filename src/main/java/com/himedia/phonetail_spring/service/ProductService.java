@@ -33,6 +33,8 @@ public class ProductService {
         return pdao.getProduct(pseq);
     }
 
+
+
     public HashMap<String, Object> getProductList(HttpServletRequest request) {
         HashMap<String, Object> result = new HashMap<>();
         HttpSession session = request.getSession();
@@ -70,18 +72,29 @@ public class ProductService {
             session.removeAttribute("key");
         }
 
+        String sellstate="";
+        if(request.getParameter("sellstate")!=null){
+            sellstate=request.getParameter("sellstate");
+            session.setAttribute("sellstate",sellstate);
+        }else if(session.getAttribute("sellstate")!=null){
+            sellstate = (String)session.getAttribute("sellstate");
+        }else{
+            session.removeAttribute("sellstate");
+        }
+
         // paging을 위한 상품전체 갯수 세기 + 현재 페이지 표시
         Paging paging = new Paging();
         paging.setPage(page);
-        int count = pdao.getAllCount(brand, key, "model");
+        int count = pdao.getAllCount(brand, sellstate, key, "model");
         paging.setTotalCount(count);
         paging.calPaing();
         paging.setStartNum(paging.getStartNum()-1);
-        List<ReportDTO> productList = pdao.getProductList(paging,brand,key,"model");
+        List<ReportDTO> productList = pdao.getProductList(paging, brand, sellstate, key,"model");
         result.put("productList", productList);
         result.put("paging", paging);
         result.put("key", key);
         result.put("brand", brand);
+        result.put("sellstate", sellstate);
         return result;
 
     }
@@ -96,5 +109,13 @@ public class ProductService {
 
     public void deleteProduct(int pseq) {
         pdao.deleteProduct(pseq);
+    }
+
+    public void plusReadcount(int pseq) {
+        pdao.plusReadcount(pseq);
+    }
+
+    public void soldProduct(int pseq) {
+        pdao.sold(pseq);
     }
 }
