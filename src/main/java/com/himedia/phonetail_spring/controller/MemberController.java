@@ -1,13 +1,11 @@
 package com.himedia.phonetail_spring.controller;
 
 import com.google.gson.Gson;
-import com.himedia.phonetail_spring.dao.IMemberDAO;
 import com.himedia.phonetail_spring.dto.KakaoProfile;
 import com.himedia.phonetail_spring.dto.MemberDTO;
 import com.himedia.phonetail_spring.dto.OAuthToken;
 import com.himedia.phonetail_spring.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -200,7 +198,7 @@ public class MemberController {
         }
         HttpSession session = request.getSession();
         session.setAttribute("login", mdto);
-        return "redirect:main";
+        return "redirect:/";
 
     }
 
@@ -249,28 +247,24 @@ public class MemberController {
         return mav;
     }
 
-    @GetMapping("/deleteMember")
-    public ModelAndView deleteMember(@RequestParam("userid") String userid, HttpSession session) {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("redirect:/"); // 회원 삭제 후 메인 페이지로 리다이렉트
 
-        // 회원 삭제 수행
+    @PostMapping("/deleteMember")
+    public String deleteMember(@RequestParam("userid") String userid, HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        
         int result = ms.deleteMember(userid);
 
         if (result == 1) {
-            // 회원 삭제 성공 시 세션 무효화
             session.invalidate();
-            // 리다이렉트 시 메시지 전달
-            mav.addObject("message", "회원정보가 정상적으로 삭제되었습니다");
+            model.addAttribute("message", "회원정보가 정상적으로 삭제되었습니다");
         } else {
-            // 회원 삭제 실패 시 메시지 전달
-            mav.addObject("message", "회원탈퇴가 정상적으로 완료되지 못했습니다. 다음에 다시 시도하세요");
+            model.addAttribute("message", "회원탈퇴가 정상적으로 완료되지 못했습니다. 다음에 다시 시도하세요");
         }
 
-        return mav;
+        return "redirect:/loginForm"; // 로그인 페이지로 리다이렉트
     }
 
 
-
-
 }
+
+

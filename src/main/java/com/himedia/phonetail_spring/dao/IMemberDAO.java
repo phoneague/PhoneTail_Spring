@@ -12,4 +12,10 @@ public interface IMemberDAO {
     int updateMember(MemberDTO mdto);
 
     int deleteMember(String userid);
+
+    void stateChangeBtoY(String userid);
+
+    void stateChangeNtoY(String userid);
+
+    void stateChangeYtoB(String userid);
 }

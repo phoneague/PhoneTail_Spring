@@ -16,6 +16,16 @@
                           address1=#{address1}, address2=#{address2}, address3=#{address3} where userid=#{userid}
     </update>
     <delete id="deleteMember">
-        delete from member where userid=#{userid}
+        UPDATE member SET userstate = 'N' WHERE userid = #{param1} AND (userstate = 'Y' OR userstate = 'B')
     </delete>
+
+    <update id="stateChangeBtoY" parameterType="com.himedia.phonetail_spring.dto.MemberDTO">
+        UPDATE member SET userstate = 'Y' WHERE userid = #{userid} AND userstate = 'B'
+    </update>
+    <update id="stateChangeNtoY" parameterType="com.himedia.phonetail_spring.dto.MemberDTO">
+        UPDATE member SET userstate = 'Y' WHERE userid = #{userid} AND userstate = 'N'
+    </update>
+    <update id="stateChangeYtoB" parameterType="com.himedia.phonetail_spring.dto.MemberDTO">
+        UPDATE member SET userstate = 'B' WHERE userid = #{userid} AND userstate = 'Y'
+    </update>
 </mapper>

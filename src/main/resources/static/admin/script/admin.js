@@ -14,14 +14,17 @@ function loginCheck(){
 
 function go_search(command) {
     var form = document.forms[0];
-    form.action = command+"&page=1"
+    form.action = command + "?page=1&userstate=" + encodeURIComponent(document.getElementsByName("userstate")[0].value);
     form.submit();
 }
+
+
+
+
 
 function userstate_YtoB() {
     var count = 0;
     var checkboxes = document.getElementsByName('userstate');
-    console.log(checkboxes); // 디버깅 로그 추가
 
     // 체크박스가 한 개만 있는 경우 처리
     if (checkboxes.length === 1) {
@@ -57,7 +60,7 @@ function userstate_YtoB() {
     } else { // 선택된 회원이 있는 경우 확인 메시지 출력
         var ans = confirm("선택한 회원을 블랙할까요?");
         if (ans) {
-            document.frm.action = "phonetail.do?command=adminUserStateChangeYtoB";
+            document.frm.action = "adminUserStateChangeYtoB";
             document.frm.submit();
         }
     }

@@ -49,7 +49,7 @@
                     </div>
                     <div class="loginbtn">
                         <input type="submit" value="회원정보수정">
-                        <input type="button" value="회원탈퇴" onClick="withDraw()">
+                        <input type="button" value="회원탈퇴" id="withDraw">
                     </div>
                 </form>
             </article>

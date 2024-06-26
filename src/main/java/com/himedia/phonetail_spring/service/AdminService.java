@@ -1,11 +1,13 @@
 package com.himedia.phonetail_spring.service;
 
 import com.himedia.phonetail_spring.dao.IAdminDAO;
+import com.himedia.phonetail_spring.dao.IMemberDAO;
 import com.himedia.phonetail_spring.dto.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.reflect.Member;
 import java.util.HashMap;
@@ -15,6 +17,9 @@ import java.util.List;
 public class AdminService {
     @Autowired
     IAdminDAO adao;
+
+    @Autowired
+    IMemberDAO mdao;
 
     public AdminDTO getAdmin(String adminid) {
         return adao.getAdmin(adminid);
@@ -93,7 +98,7 @@ public class AdminService {
         return result;
     }
 
-    public HashMap<String, Object> getAdminMemberList(HttpServletRequest request) {
+    public HashMap<String, Object> getAdminMemberList(HttpServletRequest request, @RequestParam("key") String key, @RequestParam("userstate") String userstate) {
         HashMap<String, Object> result = new HashMap<>();
         HttpSession session = request.getSession();
         // paging 객체 작업
@@ -107,7 +112,6 @@ public class AdminService {
             session.removeAttribute("page");
         }
         // key
-        String key="";
         if(request.getParameter("key")!=null){
             key=request.getParameter("key");
             session.setAttribute("key",key);
@@ -116,27 +120,41 @@ public class AdminService {
         }else{
             session.removeAttribute("key");
         }
-//        String userstate = "";
-//        if (request.getParameter("userstate") != null) {
-//            userstate = request.getParameter("userstate");
-//            session.setAttribute("userstate", userstate);
-//        } else if (session.getAttribute("userstate") != null) {
-//            userstate = (String)session.getAttribute("userstate");
-//        } else {
-//            userstate = "";
-//            session.removeAttribute("userstate");
-//        }
+
+        if (request.getParameter("userstate") != null) {
+            userstate = request.getParameter("userstate");
+            session.setAttribute("userstate", userstate);
+        } else if (session.getAttribute("userstate") != null) {
+            userstate = (String)session.getAttribute("userstate");
+        } else {
+            userstate = "";
+            session.removeAttribute("userstate");
+        }
         Paging paging = new Paging();
         paging.setPage(page);
-//        int count = adao.getMemberAllCount("member","name",key, userstate);
-        int count = adao.getAllCount("member","name",key);
+        int count = adao.getMemberAllCount("member","name", key, userstate);
+        /*int count = adao.getAllCount("member","name",key);*/
         paging.setTotalCount(count);
         paging.calPaing();
         paging.setStartNum(paging.getStartNum()-1);
-        List<MemberDTO> memberList = adao.getMemberList(paging,key);
+        List<MemberDTO> memberList = adao.getMemberList(paging,key,userstate);
         result.put("memberList",memberList);
         result.put("paging",paging);
         result.put("key",key);
+        result.put("userstate",userstate);
         return result;
+    }
+
+    public void stateChangeBtoY(String userid) {
+        mdao.stateChangeBtoY(userid);
+    }
+
+    public void stateChangeNtoY(String userid) {
+        mdao.stateChangeNtoY(userid);
+    }
+
+    public void stateChangeYtoB(String userid) {
+        mdao.stateChangeYtoB(userid);
+
     }
 }
