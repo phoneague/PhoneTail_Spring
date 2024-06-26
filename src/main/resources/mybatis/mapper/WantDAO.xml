@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.phonetail_spring.dao.IWantDAO">
+
+    <select id="checkWant" resultType="java.lang.Integer">
+        select wseq from wantlist where pseq=#{param1} and userid=#{param2}
+    </select>
+
+    <insert id="insertWant">
+        insert into wantlist(pseq, userid) values(#{param1}, #{param2})
+    </insert>
+
+    <delete id="deleteWant">
+        delete from wantlist where wseq=#{param1}
+    </delete>
+
+</mapper>

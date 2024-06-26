@@ -58,4 +58,13 @@
         UPDATE product set sellstate = 'Y' where pseq=#{param1}
     </update>
 
+    <update id="plusWantcount">
+        update product set wantcount = wantcount +1 where pseq=#{param1}
+    </update>
+
+    <update id="minusWantcount">
+        update product set wantcount = wantcount -1 where pseq=#{param1}
+    </update>
+
+
 </mapper>
