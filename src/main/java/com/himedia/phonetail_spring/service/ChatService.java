@@ -9,11 +9,13 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 @Service
 public class ChatService {
+
     @Autowired
     IChatDAO cdao;
 
@@ -38,8 +40,10 @@ public class ChatService {
         return result;
     }
 
-    public ChatingDTO getChating(int lseq) {
-        return cdao.getChating(lseq);
+    public List<ChatingDTO> getChating(int lseq) {
+        List<ChatingDTO> chatingList = cdao.getChating(lseq); // cdao는 ChatingDAO 인스턴스일 것으로 가정합니다.
+        return chatingList;
+
     }
 
     public HashMap<String, Object> getChatList(int lseq, HttpServletRequest request ) {
@@ -52,4 +56,6 @@ public class ChatService {
         return result;
 
     }
+
+
 }
