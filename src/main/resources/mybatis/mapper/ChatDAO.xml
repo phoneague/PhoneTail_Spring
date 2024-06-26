@@ -27,4 +27,5 @@
         select * from hak where lseq=#{param1}
     </select>
 
+
 </mapper>
