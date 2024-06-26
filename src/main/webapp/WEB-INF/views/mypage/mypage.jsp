@@ -7,7 +7,7 @@
         <section>
             <h2>My Info</h2>
             <article>
-                <form action="updateMemberForm" name="mypage" method="post">
+                <form action="updateMemberForm" id="updateMemberForm" name="mypage" method="post">
                     <div class="field">
                         <label>User ID</label>
                         <div>

@@ -4,7 +4,6 @@ import com.himedia.phonetail_spring.dao.IMemberDAO;
 import com.himedia.phonetail_spring.dto.MemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MemberService {
@@ -24,8 +23,15 @@ public class MemberService {
         return mdao.updateMember(mdto);
     }
 
-    @Transactional
-    public int deleteMember(String userid) {
-        return mdao.deleteMember(userid);
+    public void deleteMember(String userid) {
+        mdao.deleteMember(userid);
+    }
+
+    public String findId(String name, String email) {
+        return mdao.findId(name, email);
+    }
+
+    public String findPw(String userid, String email) {
+        return mdao.findPw(userid, email);
     }
 }

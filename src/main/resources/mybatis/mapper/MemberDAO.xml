@@ -28,4 +28,10 @@
     <update id="stateChangeYtoB" parameterType="com.himedia.phonetail_spring.dto.MemberDTO">
         UPDATE member SET userstate = 'B' WHERE userid = #{userid} AND userstate = 'Y'
     </update>
+    <select id="findId" parameterType="com.himedia.phonetail_spring.dto.MemberDTO">
+        SELECT userid FROM member WHERE name = #{name} AND email = #{email}
+    </select>
+    <select id="findPw" parameterType="com.himedia.phonetail_spring.dto.MemberDTO">
+        SELECT pwd FROM member WHERE userid = #{userid} AND email = #{email}
+    </select>
 </mapper>

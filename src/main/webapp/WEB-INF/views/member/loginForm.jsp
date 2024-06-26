@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <%@ include file="../header.jsp"%>
-<script src="/member/script/member.js" ></script>
+<script src="/script/member.js" ></script>
 <div id="loginwrap">
 <h2>LogIn</h2>
 	<article>

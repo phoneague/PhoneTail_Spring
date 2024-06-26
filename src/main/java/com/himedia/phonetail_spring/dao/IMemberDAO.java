@@ -11,11 +11,15 @@ public interface IMemberDAO {
 
     int updateMember(MemberDTO mdto);
 
-    int deleteMember(String userid);
+    void deleteMember(String userid);
 
     void stateChangeBtoY(String userid);
 
     void stateChangeNtoY(String userid);
 
     void stateChangeYtoB(String userid);
+
+    String findId(String name, String email);
+
+    String findPw(String userid, String email);
 }
