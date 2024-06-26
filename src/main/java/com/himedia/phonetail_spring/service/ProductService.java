@@ -9,8 +9,13 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -89,12 +94,33 @@ public class ProductService {
         paging.setTotalCount(count);
         paging.calPaing();
         paging.setStartNum(paging.getStartNum()-1);
-        List<ReportDTO> productList = pdao.getProductList(paging, brand, sellstate, key,"model");
+        List<ProductDTO> productList = pdao.getProductList(paging, brand, sellstate, key,"model");
         result.put("productList", productList);
         result.put("paging", paging);
         result.put("key", key);
         result.put("brand", brand);
         result.put("sellstate", sellstate);
+
+        // 몇 시간 전 게시글인지 확인하는 기능
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        Map<Integer, String> timeList = new HashMap<>();
+        for(ProductDTO product : productList) {
+            Timestamp timestamp = product.getIndate();
+            LocalDateTime productIndate = timestamp.toLocalDateTime();
+            Duration duration = Duration.between(productIndate, now);
+            int minutes = (int) duration.toMinutes();
+            int hours = (int) duration.toHours();
+            int days = (int) duration.toDays();
+            if(minutes<60) {
+                timeList.put(product.getPseq(), minutes+"분 전");
+            } else if (hours < 24) {
+                timeList.put(product.getPseq(), hours+"시간 전");
+            }else {
+                timeList.put(product.getPseq(), days+"일 전");
+            }
+        }
+        result.put("timeList", timeList);
+
         return result;
 
     }
@@ -117,5 +143,13 @@ public class ProductService {
 
     public void soldProduct(int pseq) {
         pdao.sold(pseq);
+    }
+
+    public void plusWantcount(int pseq) {
+        pdao.plusWantcount(pseq);
+    }
+
+    public void minusWantcount(int pseq) {
+        pdao.minusWantcount(pseq);
     }
 }
