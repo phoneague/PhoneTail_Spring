@@ -8,4 +8,8 @@ import org.springframework.stereotype.Service;
 public class ReportService {
     @Autowired
     IReportDAO rdao;
+
+    public void insertReport(int pseq, String userid, int retype, String recontent) {
+        rdao.insertReport(pseq,userid,retype,recontent);
+    }
 }
