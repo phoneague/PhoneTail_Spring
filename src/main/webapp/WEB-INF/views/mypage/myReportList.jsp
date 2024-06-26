@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col">${reportDTO.reseq}</div>
                         <div class="col">
-                            <a href="reportView?reseq=${reportDTO.reseq}">'${reportDTO.userid}' 님의 신고글</a>
+                            <a href="myReportView?reseq=${reportDTO.reseq}">'${reportDTO.userid}' 님의 신고글</a>
                         </div>
                         <div class="col">
                             <c:choose>

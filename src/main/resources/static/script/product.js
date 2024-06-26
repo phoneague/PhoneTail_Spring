@@ -30,7 +30,6 @@ function sold(pseq) {
 	if (answer) {
 		window.location.href = "productSold?pseq=" + pseq;
 	}
-
 }
 
 
