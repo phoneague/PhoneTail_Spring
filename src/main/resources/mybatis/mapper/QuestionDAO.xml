@@ -16,14 +16,26 @@
     <select id="getMyQnaList" resultType="com.himedia.phonetail_spring.dto.QuestionDTO">
         SELECT * FROM question WHERE title LIKE CONCAT('%',#{param2},'%') AND userid LIKE #{param3} ORDER BY indate DESC, qseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
     </select>
-    <select id="getAllQuestions" resultType="com.himedia.phonetail_spring.dto.QuestionDTO">
-        SELECT * FROM question WHERE userid LIKE CONCAT('%', #{key}, '%')
-            LIMIT #{paging.offset}, #{paging.pageSize}
-    </select>
-    <insert id="insertQna" parameterType="com.himedia.phonetail_spring.dto.QuestionDTO">
-        INSERT INTO Questions (userid, title, content, secret)
+
+    <insert id="writeQna" parameterType="com.himedia.phonetail_spring.dto.QuestionDTO">
+        INSERT INTO question (userid, title, content, secret)
         VALUES (#{userid}, #{title}, #{content}, #{secret})
     </insert>
+
+    <select id="getAllCount" resultType="_int">
+        SELECT COUNT(*) FROM question WHERE ${fieldname} LIKE CONCAT('%', #{key}, '%')
+    </select>
+
+    <select id="getAllQuestions" resultType="com.himedia.phonetail_spring.dto.QuestionDTO">
+        SELECT * FROM question WHERE ${param3} LIKE CONCAT('%', #{key}, '%')
+            LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
+    </select>
+
+    <select id="getQnaList" resultType="com.himedia.phonetail_spring.dto.QuestionDTO">
+        select * from question order by qseq desc
+    </select>
+
+
     <delete id="deleteQna" parameterType="int">
         DELETE FROM question WHERE qseq = #{qseq}
     </delete>
