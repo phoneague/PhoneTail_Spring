@@ -5,7 +5,7 @@
 
 <mapper namespace="com.himedia.phonetail_spring.dao.IChatDAO">
 
-    <select id="getChatList" resultType="com.himedia.phonetail_spring.dto.ChatListDTO">
+    <select id="chatList" resultType="com.himedia.phonetail_spring.dto.ChatListDTO">
     <![CDATA[
         SELECT * FROM (
                           SELECT model, price, pseq, lseq, sid, bid, indate, content,
@@ -17,5 +17,14 @@
         WHERE row_num = 1
         ORDER BY indate DESC
         ]]>
-</select>
+    </select>
+
+    <select id="getChating" resultType="com.himedia.phonetail_spring.dto.ChatingDTO">
+        select * from chat where lseq=#{param1} order by cseq desc
+    </select>
+
+    <select id="getChatList" resultType="com.himedia.phonetail_spring.dto.ChatListDTO">
+        select * from hak where lseq=#{param1}
+    </select>
+
 </mapper>

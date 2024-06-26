@@ -1,14 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ include file="../header.jsp" %>
+<%--<h2>하위~~~~${loginUser} , ${chatingList.indate}</h2>--%>
 <div id="main_container">
-	<h2> ${chatList.sid} , ${chatList.bid} 의 채팅방</h2>			
+	<h2> ${chatList.sid} , ${chatList.bid.toString()} 의 채팅방</h2>
 		<div class="close-button">
-        	<button type="button" class="btn-close" aria-label="Close" onClick="location.href='phonetail.do?command=chatList'"></button>
+        	<button type="button" class="btn-close" aria-label="Close" onClick="location.href='chatList'"></button>
         </div>
 	</div>
 	<div class="reply">
 		<div class="mydiv3">
-		<c:forEach items="${chatingList}" var="chating">
+		<c:forEach items= "${chatingList}" var="chating">
 		    <c:choose>
 		        <c:when test="${not empty chating.content}">
 		            <!-- 채팅 내용이 있는 경우에만 표시 -->
@@ -39,7 +40,7 @@
 </c:forEach>
 		
 		
-		<%-- <c:forEach items="${chatingList}" var="chating">
+		&lt;%&ndash; <c:forEach items="${chatingList}" var="chating">
 				<div class="reply_row" >
 					<div class="chat_reply_col"></div>
 					<c:set var="justify_contentValue" value="flex-start" />
@@ -60,12 +61,12 @@
 						
 					</div>
 				</div>
-			</c:forEach> --%>
+			</c:forEach> &ndash;%&gt;
 		
 			
 	
 		</div>
-		<form action="phonetail.do" name="chating">
+		<form name="chating">
 		<div class="comment-form">
 				<input type="hidden" name="command" value="insertChat" /> 
 				<input type="hidden" name="loginUser" value="${loginUser}" />
