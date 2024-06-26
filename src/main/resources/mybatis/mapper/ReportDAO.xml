@@ -14,4 +14,11 @@
         INSERT INTO report(pseq, userid, retype, recontent)
         VALUES (#{param1}, #{param2}, #{param3}, #{param4})
     </insert>
+    <select id="getReportView" resultType="com.himedia.phonetail_spring.dto.ReportDTO">
+        SELECT r.*, p.userid AS pid FROM report r JOIN product p ON r.pseq = p.pseq WHERE r.reseq = ${param1}
+    </select>
+
+    <update id="updateReport">
+        UPDATE report SET restate=#{param1} WHERE reseq=${param2}
+    </update>
 </mapper>
