@@ -14,10 +14,9 @@ function loginCheck(){
 
 function go_search(command) {
     var form = document.forms[0];
-    form.action = command + "?page=1&userstate=" + encodeURIComponent(document.getElementsByName("userstate")[0].value);
+    form.action = "/" + command + "?page=1";
     form.submit();
 }
-
 
 
 

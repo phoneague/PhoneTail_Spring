@@ -19,6 +19,8 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class MemberController {
@@ -249,19 +251,59 @@ public class MemberController {
 
 
     @PostMapping("/deleteMember")
-    public String deleteMember(@RequestParam("userid") String userid, HttpServletRequest request, Model model) {
+    public String deleteMember(@RequestParam("userid") String userid, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        
-        int result = ms.deleteMember(userid);
+        System.out.println(userid);
+        ms.deleteMember(userid);
+        session.invalidate();
+        return "redirect:/loginForm";
+    }
 
-        if (result == 1) {
-            session.invalidate();
-            model.addAttribute("message", "회원정보가 정상적으로 삭제되었습니다");
+
+    @GetMapping("/findIdResult")
+    public String findIdResult(){
+        return "member/findIdResult";
+    }
+
+    @GetMapping("/findPwResult")
+    public String findPwResult(){
+        return "member/findPwResult";
+    }
+
+    @RequestMapping("/findId")
+    @ResponseBody
+    public ModelAndView findId(@RequestParam("name") String name, @RequestParam("email") String email) {
+        ModelAndView mav = new ModelAndView();
+
+        String userid = ms.findId(name, email);
+
+        if (userid != null) {
+            mav.addObject("success", true);
+            mav.addObject("userid", userid);
         } else {
-            model.addAttribute("message", "회원탈퇴가 정상적으로 완료되지 못했습니다. 다음에 다시 시도하세요");
+            mav.addObject("success", false);
         }
 
-        return "redirect:/loginForm"; // 로그인 페이지로 리다이렉트
+        mav.setViewName("member/findIdResult");
+        return mav;
+    }
+
+    @RequestMapping("/findPw")
+    @ResponseBody
+    public ModelAndView findPw(@RequestParam("userid") String userid, @RequestParam("email") String email) {
+        ModelAndView mav = new ModelAndView();
+
+        String pwd = ms.findPw(userid, email);
+
+        if (pwd != null) {
+            mav.addObject("success", true);
+            mav.addObject("pwd", pwd);
+        } else {
+            mav.addObject("success", false);
+        }
+
+        mav.setViewName("member/findPwResult");
+        return mav;
     }
 
 

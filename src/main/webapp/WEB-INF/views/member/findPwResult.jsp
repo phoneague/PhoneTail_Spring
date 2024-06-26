@@ -33,25 +33,26 @@ p{
 </style>
 </head>
 <body>
-	<div id="popup">
-		<h1>Find Pwd Result</h1>
-		<form method="post" name="formm"
-			action="phonetail.do?command=findPw">
-			<p>아이디 : <input name="userid" type="text"></p>
-			<p>이메일 : <input name="email" type="text"></p>
-			<input type="submit" value="비밀번호찾기" class="submit">
-		</form>
-		<hr>
-		<c:choose>
-			<c:when test="${not empty pwd}">
-				<p>당신의 비밀번호는 <strong>${pwd}</strong>입니다.</p>
-			</c:when>
-			<c:otherwise>
-				<p>비밀번호를 찾지 못했습니다. 정확한 아이디와 이메일을 입력하세요.</p>
-			</c:otherwise>
-		</c:choose>
-		<hr>
-	</div>
+<div id="popup">
+	<h1>Find Pwd Result</h1>
+	<form method="post" id="findPwResult" action="/findPw">
+		<p>아이디 : <input name="userid" id="userid" type="text"></p>
+		<p>이메일 : <input name="email" id="email" type="text"></p>
+		<input type="submit" value="비밀번호찾기" class="submit">
+	</form>
+	<hr>
+	<c:choose>
+		<c:when test="${not empty pwd}">
+			<p>당신의 비밀번호는 <strong>${pwd}</strong>입니다.</p>
+		</c:when>
+		<c:otherwise>
+			<p>비밀번호를 찾지 못했습니다. 정확한 아이디와 이메일을 입력하세요.</p>
+		</c:otherwise>
+	</c:choose>
+	<hr>
+</div>
+
+
 </body>
 </html>
     
