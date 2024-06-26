@@ -39,3 +39,31 @@ function handleSellstateChange() {
 	var selectedValue = selectBox.value;
 	window.location.href = 'phonetail.do?command=productList&sellstate=' + selectedValue;
 }
+
+$(function () {
+	$('#myButton').click(function () {
+		var formselect = $("#fileupForm")[0]; 	//지목된 폼을 변수에 저장
+		var formdata = new FormData(formselect);	// 전송용 폼객체에 폼과 안의 데이터(이미지)를 저장
+		$.ajax({	//
+			url: "/fileup",
+			type: "POST",
+			enctype: "multipart/form-data",
+			async: false,
+			data: formdata,
+			timeout: 10000,
+			contentType: false,
+			processData: false,
+			success: function (data) {	//controller에서 리턴된 해쉬맵이 data로 전달됨
+				if (data.STATUS == 1) {
+					$("#filename").append("<div>" + data.SAVEIMAGEFILE + "</div>")
+					$("#image").val(data.IMAGE);
+					$("#saveimagefile").val(data.SAVEIMAGEFILE);
+					$("#filename").append("<img src='product_images/" + data.SAVEIMAGEFILE + "'height='150'/>")
+				}
+			},
+			error: function () {
+				alert("실패");
+			}
+		});
+	});
+});
