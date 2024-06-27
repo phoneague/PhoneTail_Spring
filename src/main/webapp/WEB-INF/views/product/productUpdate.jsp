@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="coltitle">판매자</div>
                     <div class="col">${login.getUserid()}
-                        <input type="hidden" name="userid" value="${login.getUserid()}" />
+                        <input type="hidden" name="userid" value="${login.getUserid()}"/>
                     </div>
                 </div>
                 <div class="row">
@@ -35,31 +35,27 @@
                 </div>
                 <div class="row">
                     <div class="coltitle">모델명</div>
-                    <div class="col"><input type="text" name="model"  value="${ProductDTO.model}" /></div>
+                    <div class="col"><input type="text" name="model" value="${ProductDTO.model}"/></div>
                 </div>
                 <div class="row">
                     <div class="coltitle">가격</div>
-                    <div class="col"><input type="text" name="price" value="${ProductDTO.price}" /></div>
+                    <div class="col"><input type="text" name="price" value="${ProductDTO.price}"/></div>
                 </div>
                 <div class="row">
                     <div class="coltitle">글 내용</div>
                     <div class="col"><textarea name="comment" rows="8">${ProductDTO.comment}</textarea></div>
-                </div>
-                <div class="row">
-                    <div class="coltitle">이미지 등록</div>
-                    <div class="col">
-                        <input type="hidden" name="image" id="image"/> <%--전송될 파일이름--%>
-                        <input type="hidden" name="saveimagefile" id="saveimagefile"/> <%--전송될 파일이름--%>
-
-                        <div id="filename"></div>
-                    </div>
                 </div>
                 <input type="hidden" name="pseq" value="${ProductDTO.pseq}">
                 <input type="hidden" name="oldimage" value="${ProductDTO.image}">
                 <input type="hidden" name="oldsaveimagefile" value="${ProductDTO.saveimagefile}">
             </div>
             <div class="detailImage">
-                <img id="preview" src="/product_images/${ProductDTO.saveimagefile}" width="600" />
+                <div id="oldimageshow">
+                    <img id="preview" src="/product_images/${ProductDTO.saveimagefile}" width="400" />
+                </div>
+                <input type="hidden" name="image" id="image"/> <%--전송될 파일이름--%>
+                <input type="hidden" name="saveimagefile" id="saveimagefile"/> <%--전송될 파일이름--%>
+                <div id="filename"></div>
             </div>
         </div>
         <div class="button_box">
@@ -75,8 +71,8 @@
     </form>
     <div style="position:relative; border:1px solid black; width:500px; margin:0 auto;">
         <form name="formm" id="fileupForm" method="post" enctype="multipart/form-data">
-            <input type="file" name="fileimage" />
-            <input type="button" id="myButton" value="추가" />
+            <input type="file" name="fileimage"/>
+            <input type="button" id="myButton" value="추가"/>
         </form>
     </div>
 </div>
