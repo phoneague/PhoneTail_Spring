@@ -11,14 +11,14 @@ function go_chat(pseq,userid){
 	if(userid==""){
 		location.href='loginForm';
 	}else{
-		location.href='insertChatList&pseq='+pseq;
+		location.href='insertChatList?pseq='+pseq;
 	}
 }
 
 function go_searcha(command) {
     let Form = document.forms["chatListForm"];
     if (Form) {
-        var url = command + "&page=1"
+        var url = command + "?page=1"
         Form.action = url;
         Form.submit();
     } else {

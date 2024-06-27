@@ -30,7 +30,7 @@
     <script src="/script/product.js"></script>
     <script src="admin/script/admin.js"></script>
     <script src="/script/report.js"></script>
-    <script src="chat/ChatList.js"></script>
+    <script src="script/ChatList.js"></script>
     <script src="script/member.js"></script>
     <script src="/script/question.js"></script>
     <script src="customer/script/customer.js"></script>

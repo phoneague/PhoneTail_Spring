@@ -3,7 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
-
 <div id="main_container">
 		<div class="close-button">
         	<button type="button" class="btn-close" aria-label="Close" onClick="location.href='chatList'"></button>
@@ -38,39 +37,13 @@
 			        </c:otherwise>
     </c:choose>
 </c:forEach>
-		
-		
-		 <c:forEach items="${chatingList}" var="chating">
-				<div class="reply_row" >
-					<div class="chat_reply_col"></div>
-					<c:set var="justify_contentValue" value="flex-start" />
-							<c:if test="${chating.userid eq loginUser}" >
-							    <c:set var="justify_contentValue" value="flex-end" />
-							</c:if>
-					<div class="chat_reply_col" style="justify-content: ${justify_contentValue};">
-						<c:set var="backgroundColor" value="#1E90FF" />
-							<c:if test="${chating.userid eq loginUser}" >
-							    <c:set var="backgroundColor" value="#00acee" />
-							</c:if>
-							<div class="plz" style="background-color: ${backgroundColor};">${chating.content}</div>
-							<div class="chatdate">
-								<fmt:formatDate value="${chating.indate}" pattern="MM/dd hh:mm"/>
-							</div>
-					</div>
-					<div class="chat_reply_col">
-						
-					</div>
-				</div>
-			</c:forEach>
-		
 			
-	
+
 		</div>
-		<form name="chating">
+		<form name="chating" action="/insertChat" method="post">
 		<div class="comment-form">
-				<input type="hidden" name="command" value="insertChat" /> 
-				<input type="hidden" name="loginUser" value="${loginUser}" />
-				<%--<input type="hidden" name="lseq" value="${chatList.lseq}" />--%>
+				<input type="hidden" name="userid" value="${loginUser}" />
+				<input type="hidden" name="lseq" value="${lseq}" />
 				<div class="chat-textarea">
 						<div class="content1">
 							<input type="text" name="content" autofocus>
