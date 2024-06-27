@@ -17,4 +17,5 @@
         delete from wantlist where wseq=#{param1}
     </delete>
 
+
 </mapper>

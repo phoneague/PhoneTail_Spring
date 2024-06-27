@@ -11,4 +11,6 @@ public interface IChatDAO {
     List<ChatListDTO> chatList(String key, String userid1, String userid2);
     List<ChatingDTO> getChating(int lseq);
     List<ChatListDTO> getChatList(int lseq);
+
+    int getProductChatList(int pseq);
 }

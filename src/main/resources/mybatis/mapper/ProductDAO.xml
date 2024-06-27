@@ -41,13 +41,13 @@
     </delete>
 
     <select id="getMyAllCount" resultType="_int">
-        SELECT COUNT(*) FROM ${param1} WHERE userid LIKE #{param2}
+        SELECT COUNT(*) FROM ${param1} WHERE wuserid LIKE #{param2}
     </select>
     <select id="getMyProductList" resultType="com.himedia.phonetail_spring.dto.ProductDTO">
         SELECT * FROM product WHERE userid LIKE #{param2} ORDER BY indate , pseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
     </select>
     <select id="myWantProductList" resultType="com.himedia.phonetail_spring.dto.ProductDTO">
-        SELECT * FROM wantlist_view WHERE wuserid=#{param2} ORDER BY indate DESC, pseq DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
+        SELECT p.* FROM product p JOIN wantlist w ON p.pseq = w.pseq WHERE w.userid=#{param2} LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
     </select>
 
     <update id="plusReadcount">

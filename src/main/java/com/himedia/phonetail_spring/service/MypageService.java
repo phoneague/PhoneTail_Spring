@@ -1,8 +1,6 @@
 package com.himedia.phonetail_spring.service;
 
-import com.himedia.phonetail_spring.dao.IProductDAO;
-import com.himedia.phonetail_spring.dao.IQuestionDAO;
-import com.himedia.phonetail_spring.dao.IReportDAO;
+import com.himedia.phonetail_spring.dao.*;
 import com.himedia.phonetail_spring.dto.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MypageService {
@@ -20,7 +19,12 @@ public class MypageService {
     IReportDAO rdao;
     @Autowired
     IProductDAO pdao;
-
+    @Autowired
+    IWantDAO wdao;
+    @Autowired
+    IMemberDAO mdao;
+    @Autowired
+    IChatDAO cdao;
 
     public HashMap<String, Object> getMyQnaList(HttpServletRequest request) {
         HashMap<String, Object> result = new HashMap<>();
@@ -103,6 +107,16 @@ public class MypageService {
         }else{
             session.removeAttribute("page");
         }
+        // key
+        String key="";
+        if(request.getParameter("key")!=null){
+            key=request.getParameter("key");
+            session.setAttribute("key",key);
+        }else if(session.getAttribute("key")!=null){
+            key = (String)session.getAttribute("key");
+        }else{
+            session.removeAttribute("key");
+        }
         Paging paging = new Paging();
         paging.setPage(page);
         int count = pdao.getMyAllCount("product",myid);
@@ -130,15 +144,38 @@ public class MypageService {
         }else{
             session.removeAttribute("page");
         }
+
         Paging paging = new Paging();
         paging.setPage(page);
-        int count = pdao.getMyAllCount("product",myid);
+        int count = pdao.getMyAllCount("wantlist_view", myid);
+       // int count = wdao.getMyAllCount("want",myid,key);
+//        int count = qdao.getMyAllCount("question",myid,"title",key);
         paging.setTotalCount(count);
         paging.calPaing();
         paging.setStartNum(paging.getStartNum()-1);
-        List<ProductDTO> wantList = pdao.myWantProductList(paging,myid);
-        result.put("wantList",wantList);
+
+        List<ProductDTO> productList = pdao.myWantProductList(paging,myid);
+        //List<QuestionDTO> questionList = qdao.getMyQnaList(paging,key,myid);
+
+        Map<String, String> userStates = new HashMap<>();
+
+        for(ProductDTO productDTO : productList){
+            MemberDTO member = mdao.getMember(productDTO.getUserid());
+            if(member!=null){
+                userStates.put(member.getUserid(),member.getUserstate());
+            }
+        }
+        Map<Integer,Integer> productChatList = new HashMap<>();
+        for(ProductDTO productDTO : productList){
+            int chatCount = cdao.getProductChatList(productDTO.getPseq());
+            if(chatCount!=0){
+                productChatList.put(productDTO.getPseq(),chatCount);
+            }
+        }
+        result.put("productList",productList);
         result.put("paging",paging);
+        result.put("userStates",userStates);
+        result.put("productChatList",productChatList);
         return result;
     }
 }
