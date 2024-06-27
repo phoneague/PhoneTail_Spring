@@ -14,7 +14,5 @@ public interface IWantDAO {
 
     void deleteWant(int wseq);
 
-    int getMyAllCount(String want, String myid, String key);
 
-    List<ProductDTO> myWantProductList(Paging paging, String key, String myid);
 }

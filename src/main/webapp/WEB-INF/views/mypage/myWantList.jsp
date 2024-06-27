@@ -23,7 +23,7 @@
                             <div class="productImage">
                                 <a
                                         href="productDetail?pseq=${productDTO.pseq}"><img
-                                        src="/product/images/${productDTO.saveimagefile}" width="350px" /></a>
+                                        src="product_images/${productDTO.saveimagefile}" width="350px" /></a>
                             </div>
                             <div class="productModel">
                                 <a
