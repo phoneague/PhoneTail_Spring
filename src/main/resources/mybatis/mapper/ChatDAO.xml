@@ -26,6 +26,19 @@
     <select id="getChatList" resultType="com.himedia.phonetail_spring.dto.ChatListDTO">
         select * from hak where lseq=#{param1}
     </select>
+  
+    <insert id="insertChat" parameterType="com.himedia.phonetail_spring.dto.ChatingDTO">
+        insert into chat( lseq, userid, content) values(#{lseq}, #{userid},#{content})
+    </insert>
+
+    <select id="filter" resultType="com.himedia.phonetail_spring.dto.ChatListDTO">
+        select * from chatlist where pseq=#{pseq} and bid=#{userid}
+    </select>
+
+   <insert id="insertChatList" parameterType="com.himedia.phonetail_spring.dto.ChatListDTO">
+       insert into chatlist (sid, bid, pseq) values (#{sid}, #{bid} , #{pseq})
+   </insert>
+
     <select id="getProductChatList" resultType="Integer">
         SELECT count(lseq)
         FROM hak

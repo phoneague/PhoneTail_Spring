@@ -1,9 +1,11 @@
 package com.himedia.phonetail_spring.service;
 
 import com.himedia.phonetail_spring.dao.IChatDAO;
+import com.himedia.phonetail_spring.dao.IProductDAO;
 import com.himedia.phonetail_spring.dto.ChatListDTO;
 import com.himedia.phonetail_spring.dto.ChatingDTO;
 import com.himedia.phonetail_spring.dto.MemberDTO;
+import com.himedia.phonetail_spring.dto.ProductDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class ChatService {
 
     @Autowired
     IChatDAO cdao;
+    @Autowired
+    IProductDAO pdao;
 
 
     public HashMap<String, Object> chatList(HttpServletRequest request) {
@@ -53,9 +57,44 @@ public class ChatService {
         List<ChatListDTO> chatList = cdao.getChatList(lseq);
         result.put("loginUser", mdto.getUserid());
         result.put("chatList", chatList);
+        result.put("lseq", lseq);
         return result;
 
     }
+
+
+    public void insertChat(ChatingDTO chatingdto) {
+
+        cdao.insertChat(chatingdto);
+    }
+
+    public boolean insertChatList(HttpSession session, int pseq) {
+        MemberDTO mdto = (MemberDTO) session.getAttribute("login");
+        ProductDTO pdto = pdao.getProduct(pseq);
+        ChatListDTO fdto = cdao.filter(pdto.getPseq(), mdto.getUserid());
+        System.out.println(fdto);
+        if ( fdto==null) {
+            ChatListDTO cdto = new ChatListDTO();
+            cdto.setBid(mdto.getUserid());
+            cdto.setPseq(pseq);
+            cdto.setPrice(pdto.getPrice());
+            cdto.setModel(pdto.getModel());
+            cdto.setSid(pdto.getUserid());
+            cdto.setContent(null);
+            cdto.setIndate(new java.sql.Timestamp(System.currentTimeMillis()));
+            cdao.insertChatList(cdto);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public ChatListDTO filter(int pseq, String userid) {
+        return cdao.filter(pseq, userid);
+    }
+
 
 
 }
