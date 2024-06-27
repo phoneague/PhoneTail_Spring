@@ -3,6 +3,7 @@ package com.himedia.phonetail_spring.controller;
 import com.himedia.phonetail_spring.dto.MemberDTO;
 import com.himedia.phonetail_spring.dto.ProductDTO;
 import com.himedia.phonetail_spring.service.ProductService;
+import com.himedia.phonetail_spring.service.WantService;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -27,6 +28,9 @@ public class ProductController {
     @Autowired
     ProductService ps;
 
+    @Autowired
+    WantService ws;
+
     @GetMapping("/productList")
     public ModelAndView productList(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
@@ -47,10 +51,24 @@ public class ProductController {
     }
 
     @GetMapping("/productDetail")
-    public ModelAndView productDetail(@RequestParam("pseq") int pseq){
+    public ModelAndView productDetail(@RequestParam("pseq") int pseq, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        MemberDTO mdto =(MemberDTO)session.getAttribute("login");
+
+
+
         ModelAndView mav = new ModelAndView();
         mav.addObject("productDTO", ps.getProduct(pseq));
         ps.plusReadcount(pseq);
+
+        if(mdto != null){
+            int wantCheck = ws.checkWant(pseq, mdto.getUserid());
+            mav.addObject("wantCheck", wantCheck);
+        } else{
+            mav.addObject("wantCheck", 0);
+        }
+
+
         mav.setViewName("product/productDetail");
 
         return mav;

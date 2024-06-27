@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ include file="../header.jsp"%>
-<link rel="stylesheet" href="css/product.css">
+<link rel="stylesheet" href="/css/product.css">
 <div class="lititle">
     <h2>My WantList</h2>
 </div>
@@ -9,12 +9,6 @@
     <div class="container">
         <form name="productListForm" method="post">
             <div class="row">
-                <div class="col" style="border:none;">
-                    <div class="btn">
-                        <input type="button" value="상품등록" id="sellButton"
-                               onClick="location.href='phonetail.do?command=productInsertForm'" />
-                    </div>
-                </div>
                 <div class="col" style="display: flex; align-items: center; border:none;">
                     &nbsp; <input type="text" name="key" value="${key}" style="border: 1px solid black;"/> &nbsp;
                     &nbsp; &nbsp; <input class="btn" type="button" name="btn_search"
@@ -28,12 +22,12 @@
                         <div class="product">
                             <div class="productImage">
                                 <a
-                                        href="phonetail.do?command=productDetail&pseq=${productDTO.pseq}"><img
-                                        src="product/images/${productDTO.saveimagefile}" width="350px" /></a>
+                                        href="productDetail?pseq=${productDTO.pseq}"><img
+                                        src="product_images/${productDTO.saveimagefile}" width="350px" /></a>
                             </div>
                             <div class="productModel">
                                 <a
-                                        href="phonetail.do?command=productDetail&pseq=${productDTO.pseq}">모델명
+                                        href="productDetail?pseq=${productDTO.pseq}">모델명
                                     : ${productDTO.model}</a>
                             </div>
                             <div class="productPrice">가격 : ${productDTO.price}</div>

@@ -36,18 +36,11 @@
                     <div class="coltitle">글 내용</div>
                     <div class="col"><textarea name="comment" rows="8">${dto.comment}</textarea></div>
                 </div>
-                <div class="row">
-                    <div class="coltitle">이미지 등록</div>
-                    <div class="col">
-                        <input type="hidden" name="image" id="image"/> <%--전송될 파일이름--%>
-                        <input type="hidden" name="saveimagefile" id="saveimagefile"/> <%--전송될 파일이름--%>
-
-                        <div id="filename"></div>
-                    </div>
-                </div>
             </div>
             <div class="detailImage">
-                <img id="preview" src="" width="600" />
+                <input type="hidden" name="image" id="image"/> <%--전송될 파일이름--%>
+                <input type="hidden" name="saveimagefile" id="saveimagefile"/> <%--전송될 파일이름--%>
+                <div id="filename"></div>
             </div>
         </div>
         <div class="button_box">

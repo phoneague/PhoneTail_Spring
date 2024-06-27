@@ -12,7 +12,7 @@
 			관리자 접속상태:
 			<c:choose>
 				<c:when test="${!empty adminUser.adminid}">O(${adminUser.adminid})&nbsp;
-					<a href="adminReportList?page=1">관리자 페이지로 드가자</a>
+					<a href="adminReportList?page=1&key=">관리자 페이지로 드가자</a>
 					&nbsp;/&nbsp;<a href="adminLogout">로그아웃</a>
 					
 				</c:when>

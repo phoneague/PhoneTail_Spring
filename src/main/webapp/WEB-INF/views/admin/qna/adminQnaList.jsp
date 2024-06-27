@@ -6,7 +6,7 @@
 <div class="content-wrapper">
     <%@ include file="../admin_submenu.jsp"%>
     <div class="container">
-        <form method="post" name="frm">
+        <form method="get" name="frm">
             <div class="litb">
                 <div class="row">
                     <div class="col" style="display: flex; align-items:right;">

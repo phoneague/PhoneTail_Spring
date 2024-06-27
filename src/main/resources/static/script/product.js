@@ -56,10 +56,12 @@ $(function previewImg() {
             processData: false,
             success: function (data) {	//controller에서 리턴된 해쉬맵이 data로 전달됨
                 if (data.STATUS == 1) {
-                    $("#filename").append("<div>" + data.SAVEIMAGEFILE + "</div>")
+                    $("#oldimageshow").remove();
+                    $("#filename").empty();
                     $("#image").val(data.IMAGE);
                     $("#saveimagefile").val(data.SAVEIMAGEFILE);
-                    $("#filename").append("<img src='product_images/" + data.SAVEIMAGEFILE + "'height='150'/>")
+                    $("#filename").append("<img src='product_images/" + data.SAVEIMAGEFILE + "'height='500'/>")
+                    $("#filename").append("<div>" + data.SAVEIMAGEFILE + "</div>")
                 }
             },
             error: function () {
@@ -79,8 +81,11 @@ function wantToggle(pseq, userid) {
             timeout: 10000,
             success: function (result) {
                 if (result.STATUS === 'Y') {
+                    $("#wantToggle").css("background", "red");
                     alert("상품을 찜했습니다");
                 } else if (result.STATUS === "N") {
+                    $("#wantToggle").css("background", "#3f4549");
+
                     alert("상품의 찜을 해제했습니다.");
                 } else {
                     alert("알 수 없는 오류가 발생했습니다. 관리자에게 문의하세요");
@@ -94,26 +99,3 @@ function wantToggle(pseq, userid) {
 }
 
 
-function toggleWishlist(productId) {
-    $.ajax({
-        url: contextPath + "/wishlist/toggle",
-        type: "POST",
-        data: {productId: productId},
-        success: function (response) {
-            if (response.status === "success") {
-                if (response.isWished) {
-                    alert("상품을 찜했습니다.");
-                    // UI 업데이트 로직: 찜 버튼을 '찜 취소'로 변경, 찜 횟수 증가 등
-                } else {
-                    alert("상품 찜을 취소했습니다.");
-                    // UI 업데이트 로직: 찜 버튼을 '찜하기'로 변경, 찜 횟수 감소 등
-                }
-            } else {
-                alert("에러가 발생했습니다: " + response.message);
-            }
-        },
-        error: function () {
-            alert("서버와의 통신 중 오류가 발생했습니다.");
-        }
-    });
-}

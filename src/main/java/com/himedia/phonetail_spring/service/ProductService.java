@@ -145,11 +145,4 @@ public class ProductService {
         pdao.sold(pseq);
     }
 
-    public void plusWantcount(int pseq) {
-        pdao.plusWantcount(pseq);
-    }
-
-    public void minusWantcount(int pseq) {
-        pdao.minusWantcount(pseq);
-    }
 }

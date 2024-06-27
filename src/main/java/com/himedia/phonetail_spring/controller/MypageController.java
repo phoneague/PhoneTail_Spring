@@ -94,8 +94,10 @@ public class MypageController {
             mav.setViewName("member/loginForm");
         } else {
             HashMap<String, Object> result = ms.getMyWantList(request);
-            mav.addObject("wantList",result.get("wantList"));
+            mav.addObject("productList",result.get("productList"));
             mav.addObject("paging",result.get("paging"));
+            mav.addObject("userStates",result.get("userStates"));
+            mav.addObject("productChatList",result.get("productChatList"));
             mav.setViewName("mypage/myWantList");
         }
         return mav;
