@@ -1,5 +1,6 @@
 package com.himedia.phonetail_spring.service;
 
+import com.himedia.phonetail_spring.dao.IChatDAO;
 import com.himedia.phonetail_spring.dao.IProductDAO;
 import com.himedia.phonetail_spring.dto.Paging;
 import com.himedia.phonetail_spring.dto.ProductDTO;
@@ -23,6 +24,8 @@ public class ProductService {
     @Autowired
     IProductDAO pdao;
 
+    @Autowired
+    IChatDAO cdao;
 
     public List<ProductDTO> getBrandList(String brand) {
         return pdao.getBrandList(brand);
@@ -100,6 +103,18 @@ public class ProductService {
         result.put("key", key);
         result.put("brand", brand);
         result.put("sellstate", sellstate);
+
+        // 각 리스트별 채팅방 개수를 확인하기 위한 데이터
+        Map<Integer, Integer> productChatList = new HashMap<>();
+
+        for(ProductDTO product : productList) {
+            int chatCount = cdao.getProductChatList(product.getPseq());
+            if(chatCount != 0) {
+                productChatList.put(product.getPseq(),chatCount);
+            }
+        }
+        result.put("productChatList", productChatList);
+
 
         // 몇 시간 전 게시글인지 확인하는 기능
         LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));

@@ -44,6 +44,7 @@ public class ProductController {
         mav.addObject("key", result.get("key"));
         mav.addObject("sellstate", result.get("sellstate"));
         mav.addObject("timeList", result.get("timeList"));
+        mav.addObject("productChatList", result.get("productChatList"));
 
         mav.setViewName("product/productList");
 
