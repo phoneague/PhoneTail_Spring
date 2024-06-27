@@ -19,6 +19,7 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 @Controller
 public class MemberController {
@@ -202,18 +203,19 @@ public class MemberController {
 
     }
 
-    @GetMapping("/idcheckForm")
-    public ModelAndView idcheckForm(@RequestParam("userid") String userid) {
-        ModelAndView mav = new ModelAndView();
+    @PostMapping("/idcheck")
+    @ResponseBody
+    public HashMap<String, Object> idcheck(@RequestParam("userid") String userid) {
+        HashMap<String, Object> result = new HashMap<String, Object>();
         MemberDTO mdto = ms.getMember(userid);
         if (mdto == null)
-            mav.addObject("result", -1);
+            result.put("result", -1);
         else
-            mav.addObject("result", 1);
-        mav.addObject("userid", userid);
-        mav.setViewName("member/idcheck");
-        return mav;
+            result.put("result", 1);
+        result.put("userid", userid);
+        return result;
     }
+
 
     @PostMapping("/updateMemberForm")
     public ModelAndView updateMemberForm(@RequestParam("userid") String userid, HttpServletRequest request) {
@@ -269,7 +271,6 @@ public class MemberController {
     }
 
     @RequestMapping("/findId")
-    @ResponseBody
     public ModelAndView findId(@RequestParam("name") String name, @RequestParam("email") String email) {
         ModelAndView mav = new ModelAndView();
 
@@ -287,7 +288,6 @@ public class MemberController {
     }
 
     @RequestMapping("/findPw")
-    @ResponseBody
     public ModelAndView findPw(@RequestParam("userid") String userid, @RequestParam("email") String email) {
         ModelAndView mav = new ModelAndView();
 

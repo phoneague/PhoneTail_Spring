@@ -5,13 +5,13 @@
 	<section>
 		<h2>Join Us</h2>
 		<article>
-			<form action="join" method="post" name="joinForm">
+			<form action="join" method="post" name="joinForm" id="joinForm">
 				<div class="field">
 					<label>User ID</label>
 					<div>
 						<input type="text" name="userid" size="12" value="${dto.userid != null ? dto.userid : ''}">
 						<input type="hidden" name="reid" value="${reid}">
-						<input class="checkbtn" type="button" value="중복 체크" onclick="idcheck()">
+						<input class="checkbtn" type="button" value="중복 체크" id="idcheck">
 					</div>
 				</div>
 				<div class="field"><label>Password</label><input type="password"  name="pwd"></div>
