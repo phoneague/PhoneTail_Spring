@@ -119,7 +119,7 @@ public class MypageService {
         }
         Paging paging = new Paging();
         paging.setPage(page);
-        int count = pdao.getMyAllCount("product",myid);
+        int count = pdao.getMyAllCount("product","userid",myid);
         paging.setTotalCount(count);
         paging.calPaing();
         paging.setStartNum(paging.getStartNum()-1);
@@ -147,7 +147,7 @@ public class MypageService {
 
         Paging paging = new Paging();
         paging.setPage(page);
-        int count = pdao.getMyAllCount("wantlist_view", myid);
+        int count = pdao.getMyAllCount("wantlist_view","wuserid", myid);
        // int count = wdao.getMyAllCount("want",myid,key);
 //        int count = qdao.getMyAllCount("question",myid,"title",key);
         paging.setTotalCount(count);

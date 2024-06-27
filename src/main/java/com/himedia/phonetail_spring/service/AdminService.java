@@ -163,7 +163,7 @@ public class AdminService {
 
 
 
-    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
+//    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
     public int processReport(String newRestate, String oldRestate, int reseq, String pid) {
         if (newRestate.equals(oldRestate)) {
             return 0;

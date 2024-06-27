@@ -6,7 +6,7 @@
 <div class="content-wrapper">
     <%@ include file="mypage_submenu.jsp"%>
     <div class="container">
-        <form method="post" name="frm">
+        <form method="get" name="frm">
             <div class="litb">
                 <div class="row">
                     <div class="coltitle">번호</div>
