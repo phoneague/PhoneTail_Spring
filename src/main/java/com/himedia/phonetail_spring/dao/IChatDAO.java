@@ -15,5 +15,6 @@ public interface IChatDAO {
     ChatListDTO filter(int pseq, String userid);
     void insertChatList(ChatListDTO cdto);
     int getProductChatList(int pseq);
-
+    void Chatingroom(int lseq , String userid  );
+    int getlseq();
 }
