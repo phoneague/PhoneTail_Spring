@@ -16,5 +16,11 @@
     <delete id="deleteWant">
         delete from wantlist where wseq=#{param1}
     </delete>
+    <select id="getMyAllCount" resultType="_int">
+        SELECT COUNT(*) FROM wantlist_view WHERE model LIKE concat(('%', #{param3}, '%') AND userid LIKE #{param2}
+    </select>
+    <select id="myWantProductList">
+        SELECT * FROM wantlist_view WHERE model LIKE CONCAT('%',#{param2},'%') AND userid LIKE #{param3} ORDER BY indate DESC LIMIT #{param1.displayRow} OFFSET #{param1.startNum}
+    </select>
 
 </mapper>

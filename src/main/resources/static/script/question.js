@@ -1,8 +1,4 @@
-function go_search(command) {
-    var form = document.forms[0];
-    form.action = "/" + command + "?page=1";
-    form.submit();
-}
+
 function go_write(){
     let Form = document.writeQnaForm.submit();
     if (Form.title.value == "") {

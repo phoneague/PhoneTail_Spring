@@ -51,7 +51,7 @@ public class AdminController {
             } else if (adto.getPwd().equals(admindto.getPwd())) {
                 HttpSession session = request.getSession();
                 session.setAttribute("adminUser", adto);
-                url = "redirect:/adminReportList";
+                url = "redirect:/adminReportList?page=1&key=";
             }
         }
         return url;

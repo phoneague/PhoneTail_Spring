@@ -25,15 +25,14 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="script/jquery-3.7.1.min.js"></script>
-    <script src="script/phonetail.js"></script>
+    <script src="/script/jquery-3.7.1.min.js"></script>
+    <script src="/script/phonetail.js"></script>
     <script src="/script/product.js"></script>
-    <script src="admin/script/admin.js"></script>
+    <script src="/script/admin.js"></script>
     <script src="/script/report.js"></script>
-    <script src="chat/ChatList.js"></script>
-    <script src="script/member.js"></script>
+    <script src="/chat/ChatList.js"></script>
+    <script src="/script/member.js"></script>
     <script src="/script/question.js"></script>
-    <script src="customer/script/customer.js"></script>
 
 
 </head>
@@ -56,7 +55,7 @@
                 </c:choose>
                 <a href="productInsertForm">SELL</a>
                 <a href="mypage">MY PAGE</a>
-                <a href="qnaList?page=1">Q&A</a>
+                <a href="qnaList?page=1&key=">Q&A</a>
                 <a href="chatList">CHAT</a>
             </div>
             <div class="hmenu">

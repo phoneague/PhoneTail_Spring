@@ -3,6 +3,7 @@ package com.himedia.phonetail_spring.service;
 import com.himedia.phonetail_spring.dao.IProductDAO;
 import com.himedia.phonetail_spring.dao.IQuestionDAO;
 import com.himedia.phonetail_spring.dao.IReportDAO;
+import com.himedia.phonetail_spring.dao.IWantDAO;
 import com.himedia.phonetail_spring.dto.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +21,8 @@ public class MypageService {
     IReportDAO rdao;
     @Autowired
     IProductDAO pdao;
+    @Autowired
+    IWantDAO wdao;
 
 
     public HashMap<String, Object> getMyQnaList(HttpServletRequest request) {
@@ -103,6 +106,16 @@ public class MypageService {
         }else{
             session.removeAttribute("page");
         }
+        // key
+        String key="";
+        if(request.getParameter("key")!=null){
+            key=request.getParameter("key");
+            session.setAttribute("key",key);
+        }else if(session.getAttribute("key")!=null){
+            key = (String)session.getAttribute("key");
+        }else{
+            session.removeAttribute("key");
+        }
         Paging paging = new Paging();
         paging.setPage(page);
         int count = pdao.getMyAllCount("product",myid);
@@ -130,13 +143,25 @@ public class MypageService {
         }else{
             session.removeAttribute("page");
         }
+        // key
+        String key="";
+        if(request.getParameter("key")!=null){
+            key=request.getParameter("key");
+            session.setAttribute("key",key);
+        }else if(session.getAttribute("key")!=null){
+            key = (String)session.getAttribute("key");
+        }else{
+            session.removeAttribute("key");
+        }
         Paging paging = new Paging();
         paging.setPage(page);
-        int count = pdao.getMyAllCount("product",myid);
+        int count = wdao.getMyAllCount("want",myid,key);
+//        int count = qdao.getMyAllCount("question",myid,"title",key);
         paging.setTotalCount(count);
         paging.calPaing();
         paging.setStartNum(paging.getStartNum()-1);
-        List<ProductDTO> wantList = pdao.myWantProductList(paging,myid);
+        List<ProductDTO> wantList = wdao.myWantProductList(paging,key,myid);
+        //List<QuestionDTO> questionList = qdao.getMyQnaList(paging,key,myid);
         result.put("wantList",wantList);
         result.put("paging",paging);
         return result;
