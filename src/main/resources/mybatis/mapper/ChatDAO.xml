@@ -39,10 +39,19 @@
        insert into chatlist (sid, bid, pseq) values (#{sid}, #{bid} , #{pseq})
    </insert>
 
+
     <select id="getProductChatList" resultType="Integer">
         SELECT count(lseq)
         FROM hak
         WHERE pseq = ${param1}
+    </select>
+
+    <insert id="Chatingroom" parameterType="com.himedia.phonetail_spring.dto.ChatingDTO">
+        insert into Chat(lseq , userid , indate, content) values( #{param1}, #{userid}, now(), null)
+    </insert>
+
+    <select id="getlseq" resultType="Integer">
+        select max(lseq) from chatlist
     </select>
 
 </mapper>

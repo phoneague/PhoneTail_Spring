@@ -25,6 +25,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class ChatController {
@@ -80,7 +81,8 @@ public class ChatController {
     public String insertChatList(HttpSession session, @RequestParam("pseq") int pseq, RedirectAttributes redirectAttributes) throws IOException {
         boolean success = cs.insertChatList(session, pseq);
         if (success) {
-            return "redirect:/gochatList";
+
+            return "redirect:/goChatList";
         } else {
             // Assuming 'filter' method returns a valid lseq
             ChatListDTO fdto = cs.filter(pseq, ((MemberDTO) session.getAttribute("login")).getUserid());
@@ -89,5 +91,37 @@ public class ChatController {
 
         }
     }
+
+    @GetMapping("/goChatList")
+    public String goChatList(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        MemberDTO mdto = (MemberDTO) session.getAttribute("login");
+
+        String key = ""; // 필요한 경우 key 값을 설정
+
+        HashMap<String, Object> result = cs.chatList(request); // ChatService의 chatList 메서드 호출
+
+        ArrayList<ChatListDTO> chatList = (ArrayList<ChatListDTO>) result.get("chatList");
+        int maxLseq = Integer.MIN_VALUE;
+
+        // chatList에서 최대 lseq 값을 찾기
+        for (ChatListDTO chat : chatList) {
+            int lseq = chat.getLseq();
+            if (lseq > maxLseq) {
+                maxLseq = lseq;
+            }
+        }
+
+        // 최대 lseq에 해당하는 채팅방 정보 가져오기
+        ChatListDTO chatListDTO = cs.getChatListByLseq(maxLseq);
+        List<ChatingDTO> chatingList = cs.getChatingByLseq(maxLseq);
+
+        model.addAttribute("loginUser", mdto.getUserid());
+        model.addAttribute("chatingList", chatingList);
+        model.addAttribute("chatList", chatListDTO);
+
+        return "redirect:/chating?lseq=" + maxLseq;
+    }
+
 
 }

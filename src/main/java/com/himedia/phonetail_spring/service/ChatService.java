@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,7 +74,7 @@ public class ChatService {
         ProductDTO pdto = pdao.getProduct(pseq);
         ChatListDTO fdto = cdao.filter(pdto.getPseq(), mdto.getUserid());
         System.out.println(fdto);
-        if ( fdto==null) {
+        if ( fdto == null ) {
             ChatListDTO cdto = new ChatListDTO();
             cdto.setBid(mdto.getUserid());
             cdto.setPseq(pseq);
@@ -81,9 +82,12 @@ public class ChatService {
             cdto.setModel(pdto.getModel());
             cdto.setSid(pdto.getUserid());
             cdto.setContent(null);
-            cdto.setIndate(new java.sql.Timestamp(System.currentTimeMillis()));
+            java.sql.Timestamp now = new java.sql.Timestamp(System.currentTimeMillis());
+            cdto.setIndate(now);
+            // ChatListDTO를 DB에 추가하는 DAO 호출
             cdao.insertChatList(cdto);
-
+            int lseq = cdao.getlseq();
+            cdao.Chatingroom(lseq, mdto.getUserid());
             return true;
         } else {
             return false;
@@ -96,5 +100,11 @@ public class ChatService {
     }
 
 
+    public ChatListDTO getChatListByLseq(int lseq) {
+        return cdao.getChatList(lseq).get(0); // MyBatis의 경우 단일 객체를 반환하므로 첫 번째 요소를 가져옴
+    }
 
+    public List<ChatingDTO> getChatingByLseq(int lseq) {
+        return cdao.getChating(lseq);
+    }
 }
