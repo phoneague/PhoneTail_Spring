@@ -4,7 +4,7 @@
     <h2>Q&A</h2>
 </div>
 <div class="container">
-    <form name="frm">
+    <form name="frm" method="get">
         <div class="litb">
             <div class="row">
                 <div class="col" style="display: flex; align-items:right;">
