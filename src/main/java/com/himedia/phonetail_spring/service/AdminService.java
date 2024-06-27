@@ -179,4 +179,5 @@ public class AdminService {
     public ReportDTO getReportView(int reseq) {
         return rdao.getReportView(reseq);
     }
+
 }

@@ -21,7 +21,7 @@ public class CustomerService {
         qdao.updateReadCount(qseq);
     }
 
-    public Object getQna(int qseq) {
+    public QuestionDTO getQna(int qseq) {
         return qdao.getQna(qseq);
     }
 
@@ -73,5 +73,9 @@ public class CustomerService {
 
     public void writeQna(String userid, String title, String content, boolean secret) {
         qdao.writeQna(userid, title, content, secret);
+    }
+
+    public void writeQnaReply(int qseq, String qreply) {
+        qdao.writeQnaReply(qseq, qreply);
     }
 }

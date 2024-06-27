@@ -1,8 +1,6 @@
 package com.himedia.phonetail_spring.controller;
 
 import com.himedia.phonetail_spring.dto.MemberDTO;
-import com.himedia.phonetail_spring.dto.Paging;
-import com.himedia.phonetail_spring.dto.QuestionDTO;
 import com.himedia.phonetail_spring.service.CustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
-import java.util.List;
 
 @Controller
 public class CustomerController {

@@ -19,4 +19,5 @@ public interface IAdminDAO {
     List<MemberDTO> getMemberList(Paging paging, String key, String userstate);
 
     int getMemberAllCount(String member, String name, String key, String userstate);
+
 }

@@ -34,5 +34,8 @@
             AND userstate = #{userstate}
         </if>
     </select>
+    <select id="getQna" resultType="com.himedia.phonetail_spring.dto.QuestionDTO">
+        SELECT * FROM question WHERE qseq = #{qseq}
+    </select>
 
 </mapper>

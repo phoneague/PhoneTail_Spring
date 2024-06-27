@@ -13,7 +13,7 @@ public interface IQuestionDAO {
 
     void updateReadCount(int qseq);
 
-    Object getQna(int qseq);
+    QuestionDTO getQna(int qseq);
 
     int getMyAllCount(String tablename, String myid, String fieldname, String key);
 
@@ -24,4 +24,6 @@ public interface IQuestionDAO {
     int getAllCount(String fieldname, String key);
 
     void writeQna(String userid, String title, String content, boolean secret);
+
+    void writeQnaReply(int qseq, String qreply);
 }
