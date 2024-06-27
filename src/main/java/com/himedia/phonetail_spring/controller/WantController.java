@@ -26,7 +26,6 @@ public class WantController {
     public HashMap<String, Object> wantToggle(
             @RequestParam("pseq")Integer pseq, @RequestParam("userid")String userid) {
         HashMap<String,Object> result = new HashMap<>();
-        System.out.println(pseq);
         int wseq = ws.checkWant(pseq, userid);
         if(wseq==0){
             ws.insertWant(pseq, userid);
