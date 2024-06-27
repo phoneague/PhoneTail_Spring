@@ -94,7 +94,14 @@
         <c:otherwise>
             <div class="button_box">
                 <c:if test="${productDTO.sellstate eq 'N'}">
-                    <input type="button" id="wantToggle" value="찜" onClick="wantToggle(${productDTO.pseq}, '${login.userid}')"/>
+                    <c:choose>
+                        <c:when test="${wantCheck != 0}">
+                            <input type="button" id="wantToggle" value="찜" onClick="wantToggle(${productDTO.pseq}, '${login.userid}')" style="background-color:red;"/>
+                        </c:when>
+                        <c:otherwise>
+                            <input type="button" id="wantToggle" value="찜" onClick="wantToggle(${productDTO.pseq}, '${login.userid}')"/>
+                        </c:otherwise>
+                    </c:choose>
                 </c:if>
                 <input type="button" value="1:1 대화"
                        onClick="go_chat(${productDTO.pseq},'${login.userid}')" />

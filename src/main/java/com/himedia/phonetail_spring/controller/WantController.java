@@ -5,6 +5,7 @@ import com.himedia.phonetail_spring.service.WantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,9 +19,8 @@ public class WantController {
     @Autowired
     private WantService ws;
 
-    @Autowired
-    private ProductService ps;
 
+    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
     @PostMapping("/wantToggle")
     @ResponseBody
     public HashMap<String, Object> wantToggle(
@@ -30,12 +30,10 @@ public class WantController {
         int wseq = ws.checkWant(pseq, userid);
         if(wseq==0){
             ws.insertWant(pseq, userid);
-            ps.plusWantcount(pseq);
             result.put("STATUS", "Y");
             result.put("message", "찜 성공");
         } else{
-            ws.deleteWant(wseq);
-            ps.minusWantcount(pseq);
+            ws.deleteWant(wseq, pseq);
             result.put("STATUS", "N");
             result.put("message", "찜 취소");
         }
