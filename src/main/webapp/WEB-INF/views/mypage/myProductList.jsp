@@ -7,7 +7,7 @@
 <div class="content-wrapper">
     <%@ include file="mypage_submenu.jsp"%>
     <div class="container">
-        <form name="productListForm" method="post">
+        <form name="productListForm" method="get">
             <div class="row">
                 <div class="col" style="border:none;">
                     <div class="btn">

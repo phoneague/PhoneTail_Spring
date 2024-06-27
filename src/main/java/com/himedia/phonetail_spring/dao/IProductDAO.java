@@ -24,9 +24,7 @@ public interface IProductDAO {
 
     void deleteProduct(int pseq);
 
-    int getMyAllCount(String product, String myid);
 
-    List<ProductDTO> getMyProductList(Paging paging, String myid);
 
     List<ProductDTO> myWantProductList(Paging paging, String myid);
 
@@ -37,4 +35,8 @@ public interface IProductDAO {
     void plusWantcount(int pseq);
 
     void minusWantcount(int pseq);
+
+    List<ProductDTO> getMyProductList(Paging paging, String myid);
+
+    int getMyAllCount(String wantlistView, String wuserid, String myid);
 }

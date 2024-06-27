@@ -7,14 +7,14 @@
 <div class="content-wrapper">
     <%@ include file="mypage_submenu.jsp"%>
     <div class="container">
-        <form name="productListForm" method="post">
+        <form name="productListForm" method="get">
             <div class="row">
-                <div class="col" style="display: flex; align-items: center; border:none;">
-                    &nbsp; <input type="text" name="key" value="${key}" style="border: 1px solid black;"/> &nbsp;
-                    &nbsp; &nbsp; <input class="btn" type="button" name="btn_search"
-                                         value="검색" onClick="go_search('productList')" />
+<%--                <div class="col" style="display: flex; align-items: center; border:none;">--%>
+<%--                    &nbsp; <input type="text" name="key" value="${key}" style="border: 1px solid black;"/> &nbsp;--%>
+<%--                    &nbsp; &nbsp; <input class="btn" type="button" name="btn_search"--%>
+<%--                                         value="검색" onClick="go_search('myWantList')" />--%>
                     &nbsp;&nbsp;&nbsp;
-                </div>
+<%--                </div>--%>
             </div>
             <div class="tb">
                 <div class="products">
